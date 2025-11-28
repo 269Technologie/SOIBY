@@ -4,7 +4,10 @@ FROM node:20-bullseye-slim AS builder
 WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm install --legacy-peer-deps
+
+RUN chmod +x node_modules/.bin/* || true
 
 COPY . .
 
