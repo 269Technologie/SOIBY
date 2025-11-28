@@ -5,7 +5,7 @@ pipeline {
         // Configuration
         IMAGE_NAME = "soiby"
         IMAGE_TAG = "${BUILD_NUMBER}-${new Date().format('MMdd-HHmm')}"
-        DOCKER_PORT = "8070"  // Port disponible
+        DOCKER_PORT = "8071"  // Port disponible
         CONTAINER_NAME = "soiby"
         REGISTRY = "localhost:5151"
     }
