@@ -135,7 +135,7 @@ export default function MaintenancePage() {
                   textDecoration: 'underline'
                 }}
               >
-                contact@soiby.com
+                +33 1 89 70 66 49
               </a>
             </p>
           </div>
