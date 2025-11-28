@@ -62,7 +62,7 @@ pipeline {
                         docker run -d \
                             --name ${CONTAINER_NAME} \
                             --restart unless-stopped \
-                            -p ${DOCKER_PORT}:3000 \
+                            -p ${DOCKER_PORT}:3012 \
                             ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}
                     """
                 }

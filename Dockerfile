@@ -26,8 +26,8 @@ COPY --from=builder /app/dist ./dist
 # Installer serve globalement
 RUN npm install -g serve
 
-# Exposer le port 3000
-EXPOSE 3000
+# Exposer le port 3012
+EXPOSE 3012
 
 # Démarrer l'application avec serve
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "3012"]
