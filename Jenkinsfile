@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         // IMPORTANT: Docker n'accepte que les minuscules!
-        IMAGE_NAME = "SOIBY"
+        IMAGE_NAME = "soiby"
         IMAGE_TAG = "${BUILD_NUMBER}-${new Date().format('MMdd-HHmm')}"
         DOCKER_PORT = "8070"
         CONTAINER_NAME = "comoresexpo"
