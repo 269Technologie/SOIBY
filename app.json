@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "SOIBY",
+    "slug": "SOIBY",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/SOIBY_LOGO_web.png",
+    "web": {
+      "favicon": "./assets/SOIBY_LOGO_web.png",
+      "name": "ComoresExpo",
+      "shortName": "ComoresExpo"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    }
+  }
+}
