@@ -129,7 +129,7 @@ export default function MaintenancePage() {
             <p style={{ margin: 0 }}>
               Pour toute urgence, veuillez nous contacter à{' '}
               <a 
-                href="mailto:contact@soiby.com" 
+                href="+33 1 89 70 66 49" 
                 style={{
                   color: '#3B82F6',
                   textDecoration: 'underline'
