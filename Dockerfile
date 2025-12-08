@@ -1,33 +1,55 @@
-# Étape 1: Build
-FROM node:20-bullseye-slim AS builder
-
+# Étape 1: Dépendances
+FROM node:20-bullseye-slim AS deps
 WORKDIR /app
 
 # Copier les fichiers de dépendances
 COPY package*.json ./
 
-# Installer les dépendances
-RUN npm install
+# Installer les dépendances de production et de dev
+RUN npm ci
 
-# Copier le code source
-COPY . .
-
-# Build de l'application Vite
-RUN npm run build
-
-# Étape 2: Production avec serve
-FROM node:20-bullseye-slim
-
+# Étape 2: Build
+FROM node:20-bullseye-slim AS builder
 WORKDIR /app
 
-# Copier les fichiers buildés depuis le builder
-COPY --from=builder /app/dist ./dist
+# Copier les dépendances depuis deps
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
-# Installer serve globalement
-RUN npm install -g serve
+# Désactiver la télémétrie Next.js
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build de l'application Next.js
+RUN npm run build
+
+# Étape 3: Production
+FROM node:20-bullseye-slim AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Créer un utilisateur non-root pour la sécurité
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
+# Copier les fichiers nécessaires depuis le builder
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+# Changer le propriétaire des fichiers
+RUN chown -R nextjs:nodejs /app
+
+# Utiliser l'utilisateur non-root
+USER nextjs
 
 # Exposer le port 3012
 EXPOSE 3012
 
-# Démarrer l'application avec serve
-CMD ["serve", "-s", "dist", "-l", "3012"]
+# Variables d'environnement pour le port
+ENV PORT=3012
+ENV HOSTNAME="0.0.0.0"
+
+# Démarrer l'application
+CMD ["node", "server.js"]
