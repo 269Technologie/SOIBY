@@ -5,8 +5,8 @@ WORKDIR /app
 # Copier les fichiers de dépendances
 COPY package*.json ./
 
-# Installer les dépendances de production et de dev
-RUN npm ci
+# Installer les dépendances (npm install est plus tolérant que npm ci)
+RUN npm install --legacy-peer-deps
 
 # Étape 2: Build
 FROM node:20-bullseye-slim AS builder
@@ -35,11 +35,8 @@ RUN addgroup --system --gid 1001 nodejs && \
 
 # Copier les fichiers nécessaires depuis le builder
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-# Changer le propriétaire des fichiers
-RUN chown -R nextjs:nodejs /app
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Utiliser l'utilisateur non-root
 USER nextjs
