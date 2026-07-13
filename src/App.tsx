@@ -52,20 +52,20 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
           {/* Logo in bold, italic, uppercase style */}
           <a 
-            href="#accueil" 
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection("accueil");
-            }}
-            className="flex items-center gap-2 group"
-          >
-            <div className="w-5 h-5 border-2 border-accent rounded flex items-center justify-center font-black text-accent text-[10px] transition-transform group-hover:rotate-12 duration-300">
-              ◻
-            </div>
-            <span className="font-black text-xl tracking-tighter uppercase italic text-white group-hover:text-accent transition-colors">
-              SOIBY
-            </span>
-          </a>
+  href="#accueil" 
+  onClick={(e) => {
+    e.preventDefault();
+    scrollToSection("accueil");
+  }}
+  className="flex items-center gap-2 group"
+>
+  <img 
+    src="/logo.png" 
+    alt="SOIBY" 
+    className="h-8 w-auto transition-transform group-hover:rotate-3 duration-300"
+  />
+
+</a>
 
           {/* Desktop Navigation Links - Bold Typography wide tracking */}
           <nav className="hidden md:flex items-center gap-10">
@@ -361,20 +361,20 @@ export default function App() {
           {/* Col 1: About & Domain badge (Lg span 4) */}
           <div className="lg:col-span-4 space-y-6">
             <a 
-              href="#accueil" 
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("accueil");
-              }}
-              className="flex items-center gap-2 group"
-            >
-              <div className="w-5 h-5 border-2 border-accent rounded flex items-center justify-center font-black text-accent text-[10px]">
-                ◻
-              </div>
-              <span className="font-black text-lg tracking-tighter uppercase italic text-white">
-                SOIBY
-              </span>
-            </a>
+  href="#accueil" 
+  onClick={(e) => {
+    e.preventDefault();
+    scrollToSection("accueil");
+  }}
+  className="flex items-center gap-2 group"
+>
+  <img 
+    src="/logo.png" 
+    alt="SOIBY" 
+    className="h-6 w-auto"
+  />
+
+</a>
 
             <p className="text-[10px] font-black text-accent uppercase tracking-[0.2em]">
               Respirez, on s'occupe de tout !
