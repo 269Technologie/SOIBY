@@ -3,26 +3,24 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { 
   Calendar, 
   ArrowRight, 
   HelpCircle, 
   FileText, 
-  Layers, 
   Linkedin, 
   Github, 
   Youtube, 
   Twitter, 
-  Globe, 
   Zap,
-  Cpu,
   Mail,
-  Lock,
   ChevronRight,
-  ShieldAlert,
-  Terminal,
-  Activity
+  Menu,
+  X,
+  ShieldCheck,
+  Gauge,
+  CloudCog
 } from "lucide-react";
 import CanvasBackground from "./components/CanvasBackground";
 import { motion } from "motion/react";
@@ -31,14 +29,40 @@ import SubdomainChecker from "./components/SubdomainChecker";
 import ExpertiseSection from "./components/ExpertiseSection";
 import RealisationSection from "./components/RealisationSection";
 import ContactSection from "./components/ContactSection";
+import { FaqSection, OfferSection, ProcessSection } from "./components/CommercialSections";
 
 export default function App() {
   const [isRdvOpen, setIsRdvOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const navItems = [
+    { id: "offres", label: "Offres" },
+    { id: "expertises", label: "Expertises" },
+    { id: "realisations", label: "Réalisations" },
+    { id: "contact", label: "Contact" },
+  ];
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false);
     }
   };
 
@@ -48,7 +72,8 @@ export default function App() {
       <CanvasBackground />
 
       {/* 2. Sticky Premium Navigation Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#050505]/90 backdrop-blur-md border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-[#050505]/85 backdrop-blur-xl border-b border-white/10">
+        <div className="absolute bottom-0 left-0 h-px bg-accent shadow-[0_0_10px_#FF3B30] transition-[width] duration-100" style={{ width: `${scrollProgress}%` }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
           {/* Logo in bold, italic, uppercase style */}
           <a 
@@ -68,61 +93,56 @@ export default function App() {
 </a>
 
           {/* Desktop Navigation Links - Bold Typography wide tracking */}
-          <nav className="hidden md:flex items-center gap-10">
-            <a 
-              href="#expertises" 
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("expertises");
-              }}
-              className="text-[10px] uppercase tracking-[0.3em] font-black text-neutral-400 hover:text-white hover:underline decoration-accent underline-offset-8 decoration-2 transition-all"
-            >
-              Expertises
-            </a>
-            <a 
-              href="#realisations" 
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("realisations");
-              }}
-              className="text-[10px] uppercase tracking-[0.3em] font-black text-neutral-400 hover:text-white hover:underline decoration-accent underline-offset-8 decoration-2 transition-all"
-            >
-              Réalisations
-            </a>
-            <a 
-              href="#subdomain" 
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("subdomain");
-              }}
-              className="text-[10px] uppercase tracking-[0.3em] font-black text-neutral-400 hover:text-white hover:underline decoration-accent underline-offset-8 decoration-2 transition-all"
-            >
-              Hébergement
-            </a>
-            <a 
-              href="#contact" 
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("contact");
-              }}
-              className="text-[10px] uppercase tracking-[0.3em] font-black text-neutral-400 hover:text-white hover:underline decoration-accent underline-offset-8 decoration-2 transition-all"
-            >
-              Contact
-            </a>
+          <nav className="hidden md:flex items-center gap-10" aria-label="Navigation principale">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => { e.preventDefault(); scrollToSection(item.id); }}
+                className="text-[10px] uppercase tracking-[0.3em] font-black text-neutral-400 hover:text-white hover:underline decoration-accent underline-offset-8 decoration-2 transition-all"
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
 
           {/* Booking Button - Bold Typography style */}
           <div className="flex items-center gap-4">
-            <button 
+            <button
               onClick={() => setIsRdvOpen(true)}
-              className="flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white rounded-none font-black text-xs uppercase tracking-[0.2em] transition-all border border-accent shadow-lg shadow-accent/20 hover:-translate-y-0.5 active:translate-y-0"
+              className="hidden sm:flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white rounded-none font-black text-xs uppercase tracking-[0.2em] transition-all border border-accent shadow-lg shadow-accent/20 hover:-translate-y-0.5 active:translate-y-0"
             >
               <Calendar size={13} />
               Prendre RDV
             </button>
             <div className="w-8 h-px bg-white/20 hidden lg:block"></div>
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((open) => !open)}
+              className="md:hidden grid h-11 w-11 place-items-center border border-white/10 bg-white/[0.04] text-white hover:border-accent/60 hover:text-accent transition-colors"
+              aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
+            >
+              {isMenuOpen ? <X size={19} /> : <Menu size={19} />}
+            </button>
           </div>
         </div>
+        {isMenuOpen && (
+          <nav id="mobile-navigation" className="md:hidden border-t border-white/10 bg-[#080808]/98 px-4 py-5" aria-label="Navigation mobile">
+            <div className="mx-auto flex max-w-7xl flex-col">
+              {navItems.map((item, index) => (
+                <a key={item.id} href={`#${item.id}`} onClick={(e) => { e.preventDefault(); scrollToSection(item.id); }} className="flex items-center justify-between border-b border-white/[0.06] py-4 text-xs font-black uppercase tracking-[0.22em] text-neutral-300 hover:text-accent">
+                  <span><span className="mr-3 font-mono text-[9px] text-accent">0{index + 1}</span>{item.label}</span>
+                  <ArrowRight size={14} />
+                </a>
+              ))}
+              <button onClick={() => { setIsMenuOpen(false); setIsRdvOpen(true); }} className="mt-5 flex items-center justify-center gap-2 bg-accent px-5 py-4 text-xs font-black uppercase tracking-[0.2em] text-white">
+                <Calendar size={14} /> Prendre rendez-vous
+              </button>
+            </div>
+          </nav>
+        )}
       </header>
 
       {/* 3. Hero Section */}
@@ -144,11 +164,11 @@ export default function App() {
             </div>
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.85] text-white">
-              Nous imaginons les <span className="text-accent italic font-serif lowercase">plateformes intelligentes</span> qui façonnent demain.
+              Nous concevons vos <span className="text-accent italic font-serif lowercase">plateformes IA & SaaS</span>, de l’idée à la production.
             </h1>
 
             <p className="text-neutral-400 text-sm sm:text-base md:text-lg font-medium leading-relaxed max-w-xl opacity-80">
-              SOIBY développe des technologies de nouvelle génération intégrant Intelligence Artificielle, Blockchain, Cloud et automatisation pour transformer la finance, la santé et la gestion d'entreprise.
+              Applications métier, automatisation et infrastructures sécurisées pour transformer une contrainte opérationnelle en avantage concret.
             </p>
 
             {/* Slogan styled elegantly with serif italics */}
@@ -158,10 +178,10 @@ export default function App() {
 
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <button 
-                onClick={() => scrollToSection("expertises")}
+                onClick={() => scrollToSection("contact")}
                 className="flex items-center justify-center gap-3 bg-accent hover:bg-accent-hover text-white font-black uppercase tracking-[0.2em] text-xs py-4 px-8 rounded-none transition-all border border-accent shadow-lg shadow-accent/15 hover:-translate-y-0.5"
               >
-                Découvrir SOIBY
+                Parler de mon projet
                 <ArrowRight size={14} />
               </button>
               <button 
@@ -170,6 +190,22 @@ export default function App() {
               >
                 Nos plateformes
               </button>
+            </div>
+
+            <div className="grid grid-cols-3 border-y border-white/10 pt-5 pb-4 max-w-2xl">
+              {[
+                { icon: ShieldCheck, value: "Secure", label: "By design" },
+                { icon: Gauge, value: "24/7", label: "Supervision" },
+                { icon: CloudCog, value: "Cloud", label: "Managé" },
+              ].map(({ icon: Icon, value, label }) => (
+                <div key={value} className="flex flex-col sm:flex-row items-center sm:items-start gap-2 border-r border-white/10 last:border-r-0 px-2 sm:px-4 first:pl-0">
+                  <Icon size={17} className="mt-0.5 shrink-0 text-accent" />
+                  <div className="text-center sm:text-left">
+                    <p className="text-xs font-black uppercase tracking-wider text-white">{value}</p>
+                    <p className="mt-0.5 text-[9px] font-bold uppercase tracking-wider text-neutral-500">{label}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 
@@ -254,6 +290,8 @@ export default function App() {
         </div>
       </section>
 
+      <OfferSection onContact={() => scrollToSection("contact")} />
+
       {/* 5. Section: Nos Réalisations */}
       <section id="realisations" className="py-24 px-4 sm:px-8 border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto space-y-12">
@@ -265,7 +303,7 @@ export default function App() {
             className="text-left max-w-3xl space-y-3"
           >
             <span className="text-[10px] font-black text-accent uppercase tracking-[0.25em]">
-              02 / PLATEFORMES OPÉRATIONNELLES
+              03 / PLATEFORMES OPÉRATIONNELLES
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.9] text-white">
               Nos Réalisations
@@ -286,6 +324,8 @@ export default function App() {
         </div>
       </section>
 
+      <ProcessSection />
+
       {/* 6. Section: Subdomain check simulator */}
       <section id="subdomain" className="py-24 px-4 sm:px-8 border-t border-white/10 bg-neutral-950/20 relative z-10">
         <div className="max-w-7xl mx-auto">
@@ -300,6 +340,8 @@ export default function App() {
         </div>
       </section>
 
+      <FaqSection onContact={() => scrollToSection("contact")} />
+
       {/* 7. Section: Contact */}
       <section id="contact" className="py-24 px-4 sm:px-8 border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto space-y-12">
@@ -311,7 +353,7 @@ export default function App() {
             className="max-w-3xl"
           >
             <span className="text-[10px] font-black text-accent uppercase tracking-[0.25em]">
-              03 / LANCEZ VOTRE PROJET
+              06 / LANCEZ VOTRE PROJET
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.9] text-white mt-2">
               Discutons de vos besoins

@@ -22,6 +22,8 @@ export default function CanvasBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     let animationId: number;
     let points: Point[] = [];
     const maxPoints = 110;
@@ -87,7 +89,12 @@ export default function CanvasBackground() {
       animationId = requestAnimationFrame(draw);
     };
 
-    draw();
+    if (prefersReducedMotion) {
+      draw();
+      cancelAnimationFrame(animationId);
+    } else {
+      draw();
+    }
 
     return () => {
       window.removeEventListener("resize", handleResize);

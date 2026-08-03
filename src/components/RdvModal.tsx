@@ -416,10 +416,10 @@ export default function RdvModal({ isOpen, onClose }: RdvModalProps) {
                 <div className="space-y-2">
                   <h3 className="text-2xl font-black text-white uppercase tracking-tight">C'est noté, {form.name} !</h3>
                   <p className="text-neutral-300 max-w-md mx-auto text-sm leading-relaxed">
-                    Votre créneau pour le <strong className="text-white">{currentDay.dateString} à {selectedSlot}</strong> est pré-réservé.
+                    Vous avez choisi le <strong className="text-white">{currentDay.dateString} à {selectedSlot}</strong>. Le créneau n’est pas encore réservé.
                   </p>
                   <p className="text-xs text-neutral-500 max-w-sm mx-auto">
-                    Pour finaliser et sécuriser l'événement, ajoutez-le immédiatement à votre agenda Google ou envoyez-nous la confirmation par email.
+                    Envoyez votre demande par email pour que l’équipe puisse confirmer sa disponibilité. L’ajout à Google Calendar sert uniquement de rappel personnel.
                   </p>
                 </div>
 

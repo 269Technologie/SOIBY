@@ -189,12 +189,12 @@ export default function ContactSection() {
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-2xl font-black text-white uppercase tracking-tight">Message Reçu !</h3>
+              <h3 className="text-2xl font-black text-white uppercase tracking-tight">Message prêt à envoyer</h3>
               <p className="text-neutral-300 max-w-md mx-auto text-sm leading-relaxed font-medium">
-                Merci {form.name}. Votre demande au sujet de <strong className="text-white">{form.subject}</strong> a bien été enregistrée.
+                Merci {form.name}. Votre demande au sujet de <strong className="text-white">{form.subject}</strong> est prête.
               </p>
               <p className="text-xs text-neutral-500 max-w-sm mx-auto">
-                Pour assurer la livraison instantanée de votre message, vous pouvez également envoyer une copie pré-remplie par votre messagerie locale.
+                Aucune donnée n’a encore été transmise. Ouvrez votre messagerie pour envoyer le message prérempli à SOIBY.
               </p>
             </div>
 
@@ -203,7 +203,7 @@ export default function ContactSection() {
                 href={getMailtoUrl()}
                 className="flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white font-black uppercase tracking-[0.15em] py-4 px-6 rounded-none text-xs transition-all shadow-lg shadow-accent/20 cursor-pointer"
               >
-                Copie par Email Direct
+                Ouvrir ma messagerie
                 <Send size={13} />
               </a>
               <button
