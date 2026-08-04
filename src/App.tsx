@@ -263,9 +263,9 @@ export default function App() {
           <p className="shrink-0 text-[9px] font-black uppercase tracking-[0.24em] text-neutral-500">Nos produits sont en ligne</p>
           <div className="grid flex-1 grid-cols-2 gap-px bg-white/10 sm:grid-cols-4 lg:max-w-4xl">
             {[
-              ["Windege", "https://windege.io/"],
+              ["WinEdge", "https://winedge.io/"],
               ["Pilote360", "https://pilote360.io/"],
-              ["SMS Covot", "https://smscovot.com/"],
+              ["SMS Covoit", "https://smscovot.com/"],
               ["Caisse Solidarité Maladie", "https://caissesolidaritemaladie.com/"],
             ].map(([label, url]) => (
               <a key={url} href={url} target="_blank" rel="noreferrer" className="group flex items-center justify-between bg-[#080808] px-4 py-3 text-[9px] font-black uppercase tracking-wider text-neutral-300 transition-colors hover:bg-accent hover:text-white">
@@ -475,12 +475,12 @@ export default function App() {
             <ul className="space-y-2.5 text-xs text-neutral-400">
               <li>
                 <a 
-                  href="https://windege.io/"
+                  href="https://winedge.io/"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-accent transition-colors flex items-center gap-1"
                 >
-                  <ChevronRight size={10} className="text-accent" /> Windege
+                  <ChevronRight size={10} className="text-accent" /> WinEdge
                 </a>
               </li>
               <li>
@@ -500,7 +500,7 @@ export default function App() {
                   rel="noreferrer"
                   className="hover:text-accent transition-colors flex items-center gap-1"
                 >
-                  <ChevronRight size={10} className="text-accent" /> SMS Covot
+                  <ChevronRight size={10} className="text-accent" /> SMS Covoit
                 </a>
               </li>
               <li>
