@@ -25,20 +25,13 @@ export interface Expertise {
 
 export interface TimeSlot {
   time: string;
+  startTime: string;
+  endTime: string;
   available: boolean;
 }
 
 export interface DayAvailability {
-  dateString: string; // e.g., "Lundi 14 Juillet"
-  slots: TimeSlot[];
-}
-
-export interface BookingDetails {
-  name: string;
-  email: string;
-  company: string;
-  projectType: string;
-  notes: string;
   date: string;
-  slot: string;
+  label: string;
+  slots: TimeSlot[];
 }

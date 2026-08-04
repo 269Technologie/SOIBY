@@ -15,6 +15,20 @@
   .text-huge {
     font-size: clamp(3rem, 10vw, 7.5rem);
   }
+
+  .field-input {
+    width: 100%;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(23 23 23 / 0.75);
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    color: white;
+    font-size: 0.875rem;
+    outline: none;
+  }
+
+  .field-input:focus {
+    border-color: var(--color-accent);
+  }
 }
 
 @layer base {
