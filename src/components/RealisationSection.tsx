@@ -1,181 +1,104 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState } from "react";
-import { 
-  TrendingUp, 
-  ShieldCheck, 
-  Check, 
-  ArrowRight, 
-  ExternalLink,
-  Activity,
-  Heart,
-  Briefcase,
-  Layers,
-  Sparkles
-} from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { Realisation } from "../types";
+import { ArrowUpRight, BriefcaseBusiness, Check, HeartPulse, LayoutDashboard, MessageSquareText } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+
+const products = [
+  {
+    id: "windege",
+    number: "01",
+    title: "Windege",
+    domain: "windege.io",
+    url: "https://windege.io/",
+    badge: "Finance & pilotage",
+    icon: BriefcaseBusiness,
+    description: "Une plateforme conçue pour donner une lecture plus claire des données financières et faciliter les décisions de pilotage.",
+    features: ["Vision consolidée de l’activité", "Analyse et suivi des indicateurs", "Aide à la décision", "Expérience accessible en ligne"],
+  },
+  {
+    id: "pilote360",
+    number: "02",
+    title: "Pilote360",
+    domain: "pilote360.io",
+    url: "https://pilote360.io/",
+    badge: "Copilote financier IA",
+    icon: LayoutDashboard,
+    description: "Le copilote financier qui aide les dirigeants à suivre leur entreprise, comprendre leurs chiffres et agir plus sereinement.",
+    features: ["Tableau de bord centralisé", "Suivi de la performance", "Lecture simplifiée des données", "Assistance au pilotage"],
+  },
+  {
+    id: "smscovot",
+    number: "03",
+    title: "SMS Covot",
+    domain: "smscovot.com",
+    url: "https://smscovot.com/",
+    badge: "Communication numérique",
+    icon: MessageSquareText,
+    description: "Une solution numérique SOIBY dédiée à la communication et à la circulation efficace de l’information.",
+    features: ["Accès depuis le web", "Parcours utilisateur simplifié", "Gestion centralisée", "Solution évolutive"],
+  },
+  {
+    id: "csmc",
+    number: "04",
+    title: "Caisse Solidarité Maladie",
+    domain: "caissesolidaritemaladie.com",
+    url: "https://caissesolidaritemaladie.com/",
+    badge: "Santé & solidarité",
+    icon: HeartPulse,
+    description: "Une plateforme au service de la solidarité maladie, pensée pour rendre la protection santé plus accessible aux Comores.",
+    features: ["Parcours d’adhésion numérique", "Gestion des bénéficiaires", "Suivi des services", "Accès sécurisé en ligne"],
+  },
+];
 
 export default function RealisationSection() {
-  const [activeTab, setActiveTab] = useState<string>("winedge");
-
-  const realisations: Realisation[] = [
-    {
-      id: "winedge",
-      title: "WinEdge",
-      badge: "FinTech & Blockchain",
-      description: "Plateforme décentralisée d'analyse financière et d'audit transactionnel automatisé par IA.",
-      techs: ["Blockchain Ledger", "Vae Models", "Next.js Container", "Smart Audit Engine"],
-      features: [
-        "Audit transactionnel continu sans intermédiaire",
-        "Modèles prédictifs de risques de liquidité",
-        "Rapprochement bancaire intelligent en temps réel (99.8% de précision)",
-        "Génération automatisée de rapports certifiés"
-      ],
-      impact: "+42% d'efficacité opérationnelle constatée chez nos clients institutionnels.",
-      details: "WinEdge s'adresse aux directions financières exigeantes souhaitant auditer leurs flux monétaires avec une traçabilité totale et une automatisation poussée."
-    },
-    {
-      id: "pilote360",
-      title: "Pilote360",
-      badge: "SaaS Business Intelligent",
-      description: "Le cockpit intelligent pour diriger, automatiser et optimiser l'ensemble de votre entreprise.",
-      techs: ["Intelligence Artificielle", "FastAPI Server", "Postgres Cloud", "Tailwind GUI"],
-      features: [
-        "Dashboard analytique unifié en temps réel",
-        "Suivi et affectation automatique des tâches par IA",
-        "Génération de factures et relances intelligentes automatiques",
-        "Rapports de performance prédictifs mensuels"
-      ],
-      impact: "-30 heures administratives par mois économisées par manager en moyenne.",
-      details: "Pilote360 centralise l'ensemble de vos briques de gestion : facturation, RH, workflows opérationnels et prévisions de vente."
-    },
-    {
-      id: "csm",
-      title: "Caisse Solidarité Maladie",
-      badge: "Santé Numérique & Ledger",
-      description: "Registre de gestion sécurisé et instantané des remboursements et suivis médicaux.",
-      techs: ["Private Blockchain", "HIPAA Compliant", "React Native Client", "Zero-Knowledge Proofs"],
-      features: [
-        "Sécurisation absolue des dossiers patients sensibles",
-        "Remboursements instantanés grâce aux smart contracts",
-        "Partage sécurisé des fiches cliniques inter-professionnels",
-        "Conformité réglementaire totale de niveau médical"
-      ],
-      impact: "Délais de traitement passés de 14 jours à moins de 3 secondes.",
-      details: "La Caisse Solidarité Maladie réinvente la gestion des prestations santé en alliant la transparence de la Blockchain à la sécurité des données médicales."
-    }
-  ];
-
-  const current = realisations.find(r => r.id === activeTab) || realisations[0];
+  const [activeId, setActiveId] = useState(products[0].id);
+  const current = products.find((product) => product.id === activeId) ?? products[0];
+  const CurrentIcon = current.icon;
 
   return (
-    <div className="space-y-8">
-      {/* Tab selection bar */}
-      <div className="flex flex-wrap justify-center gap-2 p-1.5 bg-neutral-950/80 border border-white/10 rounded-none max-w-lg mx-auto">
-        {realisations.map((item) => {
-          const isActive = activeTab === item.id;
+    <div className="space-y-6">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {products.map((product) => {
+          const Icon = product.icon;
+          const active = product.id === activeId;
           return (
             <button
-              key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`flex-1 min-w-[120px] py-3.5 px-4 text-xs font-black uppercase tracking-[0.2em] rounded-none transition-all ${
-                isActive
-                  ? "bg-accent text-white shadow-lg shadow-accent/10"
-                  : "text-neutral-400 hover:text-white"
-              }`}
+              key={product.id}
+              type="button"
+              onClick={() => setActiveId(product.id)}
+              className={`group relative min-h-52 overflow-hidden border p-5 text-left transition-all ${active ? "border-accent bg-accent text-white shadow-xl shadow-accent/15" : "border-white/10 bg-neutral-900/60 text-white hover:-translate-y-1 hover:border-white/30"}`}
+              aria-pressed={active}
             >
-              {item.title}
+              <span className={`font-mono text-[9px] font-black tracking-[0.2em] ${active ? "text-white/70" : "text-accent"}`}>{product.number} / PRODUIT</span>
+              <Icon size={24} className={`absolute right-5 top-5 ${active ? "text-white" : "text-neutral-600 group-hover:text-accent"}`} />
+              <div className="mt-16">
+                <h3 className="text-xl font-black uppercase tracking-tight">{product.title}</h3>
+                <p className={`mt-2 text-[10px] font-bold uppercase tracking-wider ${active ? "text-white/70" : "text-neutral-500"}`}>{product.badge}</p>
+              </div>
+              <div className={`absolute bottom-0 left-0 h-1 transition-all ${active ? "w-full bg-white" : "w-0 bg-accent group-hover:w-full"}`} />
             </button>
           );
         })}
       </div>
 
-      {/* Main product card */}
       <AnimatePresence mode="wait">
-        <motion.div
-          key={current.id}
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.2 }}
-          className="bg-neutral-900/40 border border-white/10 rounded-none p-6 sm:p-10 relative overflow-hidden backdrop-blur-sm"
-        >
-          {/* Subtle logo background */}
-          <div className="absolute right-10 top-10 text-neutral-800/10 font-black text-7xl sm:text-9xl pointer-events-none select-none uppercase italic">
-            {current.title}
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            {/* Left side info */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="space-y-2">
-                <span className="inline-block px-3 py-1 bg-accent/10 border border-accent/20 rounded-none text-[10px] uppercase tracking-[0.15em] font-black text-accent">
-                  {current.badge}
-                </span>
-                <h3 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
-                  {current.title}
-                </h3>
-              </div>
-
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed opacity-90 font-medium">
-                {current.description}
-              </p>
-
-              <div className="space-y-3">
-                <h4 className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.2em]">Fonctionnalités incluses</h4>
-                <div className="space-y-2.5">
-                  {current.features.map((feat, i) => (
-                    <div key={i} className="flex items-start gap-3 text-sm text-neutral-400 leading-relaxed">
-                      <div className="p-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-none text-emerald-400 mt-0.5">
-                        <Check size={12} />
-                      </div>
-                      <span className="font-medium">{feat}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Technologies list */}
-              <div className="flex flex-wrap gap-2 pt-2">
-                {current.techs.map((tech) => (
-                  <span 
-                    key={tech} 
-                    className="px-3 py-1.5 bg-neutral-950 border border-white/10 rounded-none text-[10px] font-mono uppercase tracking-wider text-neutral-400"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+        <motion.article key={current.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.22 }} className="relative overflow-hidden border border-white/10 bg-neutral-900/45 p-6 backdrop-blur-sm sm:p-10">
+          <div className="pointer-events-none absolute -right-8 -top-10 select-none text-[8rem] font-black uppercase text-white/[0.025] sm:text-[12rem]">{current.number}</div>
+          <div className="relative grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <div className="mb-6 flex items-center gap-3"><div className="grid h-11 w-11 place-items-center border border-accent/30 bg-accent/10 text-accent"><CurrentIcon size={21} /></div><div><p className="text-[9px] font-black uppercase tracking-[0.2em] text-accent">{current.badge}</p><p className="mt-1 font-mono text-[10px] text-neutral-500">{current.domain}</p></div></div>
+              <h3 className="text-4xl font-black uppercase tracking-[-0.04em] text-white sm:text-5xl">{current.title}</h3>
+              <p className="mt-5 max-w-2xl text-sm font-medium leading-relaxed text-neutral-300 sm:text-base">{current.description}</p>
+              <a href={current.url} target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-3 bg-accent px-6 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-lg shadow-accent/20 transition-all hover:-translate-y-0.5 hover:bg-accent-hover">
+                Découvrir {current.title} <ArrowUpRight size={14} />
+              </a>
             </div>
-
-            {/* Right side impact panel */}
-            <div className="lg:col-span-5 bg-neutral-950 border border-white/10 rounded-none p-6 sm:p-8 space-y-6 flex flex-col justify-between h-full">
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-accent">
-                  <Activity size={18} className="animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em]">Performance & Impact</span>
-                </div>
-                
-                <p className="text-lg sm:text-xl font-black text-white leading-snug">
-                  "{current.impact}"
-                </p>
-                
-                <p className="text-xs text-neutral-400 leading-relaxed font-medium">
-                  {current.details}
-                </p>
-              </div>
-
-              <div className="pt-6 border-t border-white/10 flex justify-between items-center text-[10px] uppercase tracking-wider font-black">
-                <span className="text-neutral-500">Hébergement inclus</span>
-                <span className="text-emerald-500 flex items-center gap-1">● Actif</span>
-              </div>
+            <div className="border border-white/10 bg-neutral-950 p-6 lg:col-span-5 sm:p-8">
+              <p className="text-[9px] font-black uppercase tracking-[0.22em] text-neutral-500">Ce que la plateforme propose</p>
+              <ul className="mt-6 space-y-4">{current.features.map((feature) => <li key={feature} className="flex items-start gap-3 text-sm font-medium text-neutral-300"><span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center border border-emerald-500/25 bg-emerald-500/10 text-emerald-400"><Check size={11} /></span>{feature}</li>)}</ul>
+              <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-5 text-[9px] font-black uppercase tracking-[0.16em]"><span className="text-neutral-600">Plateforme en ligne</span><span className="flex items-center gap-2 text-emerald-400"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Visiter le site</span></div>
             </div>
           </div>
-        </motion.div>
+        </motion.article>
       </AnimatePresence>
     </div>
   );

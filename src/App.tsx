@@ -39,7 +39,7 @@ export default function App() {
   const navItems = [
     { id: "offres", label: "Offres" },
     { id: "expertises", label: "Expertises" },
-    { id: "realisations", label: "Réalisations" },
+    { id: "realisations", label: "Produits" },
     { id: "contact", label: "Contact" },
   ];
 
@@ -72,7 +72,7 @@ export default function App() {
       <CanvasBackground />
 
       {/* 2. Sticky Premium Navigation Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#050505]/85 backdrop-blur-xl border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-40 border-b border-black/10 bg-white/95 text-neutral-950 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl">
         <div className="absolute bottom-0 left-0 h-px bg-accent shadow-[0_0_10px_#FF3B30] transition-[width] duration-100" style={{ width: `${scrollProgress}%` }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
           {/* Logo in bold, italic, uppercase style */}
@@ -87,7 +87,7 @@ export default function App() {
   <img 
     src="/logo.png" 
     alt="SOIBY" 
-    className="h-8 w-auto transition-transform group-hover:rotate-3 duration-300"
+    className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
   />
 
 </a>
@@ -99,7 +99,7 @@ export default function App() {
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(e) => { e.preventDefault(); scrollToSection(item.id); }}
-                className="text-[10px] uppercase tracking-[0.3em] font-black text-neutral-400 hover:text-white hover:underline decoration-accent underline-offset-8 decoration-2 transition-all"
+                className="text-[10px] uppercase tracking-[0.3em] font-black text-neutral-500 hover:text-black hover:underline decoration-accent underline-offset-8 decoration-2 transition-all"
               >
                 {item.label}
               </a>
@@ -115,11 +115,11 @@ export default function App() {
               <Calendar size={13} />
               Prendre RDV
             </button>
-            <div className="w-8 h-px bg-white/20 hidden lg:block"></div>
+            <div className="hidden h-px w-8 bg-black/20 lg:block"></div>
             <button
               type="button"
               onClick={() => setIsMenuOpen((open) => !open)}
-              className="md:hidden grid h-11 w-11 place-items-center border border-white/10 bg-white/[0.04] text-white hover:border-accent/60 hover:text-accent transition-colors"
+              className="grid h-11 w-11 place-items-center border border-black/10 bg-neutral-100 text-black transition-colors hover:border-accent/60 hover:text-accent md:hidden"
               aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
@@ -129,10 +129,10 @@ export default function App() {
           </div>
         </div>
         {isMenuOpen && (
-          <nav id="mobile-navigation" className="md:hidden border-t border-white/10 bg-[#080808]/98 px-4 py-5" aria-label="Navigation mobile">
+          <nav id="mobile-navigation" className="border-t border-black/10 bg-white px-4 py-5 shadow-2xl md:hidden" aria-label="Navigation mobile">
             <div className="mx-auto flex max-w-7xl flex-col">
               {navItems.map((item, index) => (
-                <a key={item.id} href={`#${item.id}`} onClick={(e) => { e.preventDefault(); scrollToSection(item.id); }} className="flex items-center justify-between border-b border-white/[0.06] py-4 text-xs font-black uppercase tracking-[0.22em] text-neutral-300 hover:text-accent">
+                <a key={item.id} href={`#${item.id}`} onClick={(e) => { e.preventDefault(); scrollToSection(item.id); }} className="flex items-center justify-between border-b border-black/[0.08] py-4 text-xs font-black uppercase tracking-[0.22em] text-neutral-700 hover:text-accent">
                   <span><span className="mr-3 font-mono text-[9px] text-accent">0{index + 1}</span>{item.label}</span>
                   <ArrowRight size={14} />
                 </a>
@@ -258,6 +258,24 @@ export default function App() {
         </div>
       </section>
 
+      <div className="relative z-10 border-y border-white/10 bg-neutral-950/90 px-4 sm:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 py-5 lg:flex-row lg:items-center lg:justify-between">
+          <p className="shrink-0 text-[9px] font-black uppercase tracking-[0.24em] text-neutral-500">Nos produits sont en ligne</p>
+          <div className="grid flex-1 grid-cols-2 gap-px bg-white/10 sm:grid-cols-4 lg:max-w-4xl">
+            {[
+              ["Windege", "https://windege.io/"],
+              ["Pilote360", "https://pilote360.io/"],
+              ["SMS Covot", "https://smscovot.com/"],
+              ["Caisse Solidarité Maladie", "https://caissesolidaritemaladie.com/"],
+            ].map(([label, url]) => (
+              <a key={url} href={url} target="_blank" rel="noreferrer" className="group flex items-center justify-between bg-[#080808] px-4 py-3 text-[9px] font-black uppercase tracking-wider text-neutral-300 transition-colors hover:bg-accent hover:text-white">
+                <span className="truncate">{label}</span><ArrowRight size={11} className="ml-2 shrink-0 -rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* 4. Section: Nos Expertises */}
       <section id="expertises" className="py-24 px-4 sm:px-8 border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto space-y-12">
@@ -303,13 +321,13 @@ export default function App() {
             className="text-left max-w-3xl space-y-3"
           >
             <span className="text-[10px] font-black text-accent uppercase tracking-[0.25em]">
-              03 / PLATEFORMES OPÉRATIONNELLES
+              03 / PRODUITS SOIBY
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.9] text-white">
-              Nos Réalisations
+              Nos produits
             </h2>
             <p className="text-neutral-400 text-sm sm:text-base leading-relaxed opacity-80">
-              Découvrez les briques applicatives prêtes à être déployées et personnalisées selon vos exigences stratégiques.
+              Quatre plateformes en ligne, conçues pour répondre à des besoins concrets de pilotage, de communication et de santé.
             </p>
           </motion.div>
 
@@ -408,12 +426,12 @@ export default function App() {
     e.preventDefault();
     scrollToSection("accueil");
   }}
-  className="flex items-center gap-2 group"
+  className="group inline-flex items-center gap-2 bg-white px-3 py-2"
 >
   <img 
     src="/logo.png" 
     alt="SOIBY" 
-    className="h-6 w-auto"
+    className="h-12 w-auto object-contain"
   />
 
 </a>
@@ -457,17 +475,19 @@ export default function App() {
             <ul className="space-y-2.5 text-xs text-neutral-400">
               <li>
                 <a 
-                  href="#realisations" 
-                  onClick={(e) => { e.preventDefault(); scrollToSection("realisations"); }}
+                  href="https://windege.io/"
+                  target="_blank"
+                  rel="noreferrer"
                   className="hover:text-accent transition-colors flex items-center gap-1"
                 >
-                  <ChevronRight size={10} className="text-accent" /> WinEdge
+                  <ChevronRight size={10} className="text-accent" /> Windege
                 </a>
               </li>
               <li>
                 <a 
-                  href="#realisations" 
-                  onClick={(e) => { e.preventDefault(); scrollToSection("realisations"); }}
+                  href="https://pilote360.io/"
+                  target="_blank"
+                  rel="noreferrer"
                   className="hover:text-accent transition-colors flex items-center gap-1"
                 >
                   <ChevronRight size={10} className="text-accent" /> Pilote360
@@ -475,11 +495,17 @@ export default function App() {
               </li>
               <li>
                 <a 
-                  href="#realisations" 
-                  onClick={(e) => { e.preventDefault(); scrollToSection("realisations"); }}
+                  href="https://smscovot.com/"
+                  target="_blank"
+                  rel="noreferrer"
                   className="hover:text-accent transition-colors flex items-center gap-1"
                 >
-                  <ChevronRight size={10} className="text-accent" /> CSM
+                  <ChevronRight size={10} className="text-accent" /> SMS Covot
+                </a>
+              </li>
+              <li>
+                <a href="https://caissesolidaritemaladie.com/" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors flex items-center gap-1">
+                  <ChevronRight size={10} className="text-accent" /> Caisse Solidarité Maladie
                 </a>
               </li>
             </ul>
