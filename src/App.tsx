@@ -37,9 +37,9 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const navItems = [
-    { id: "offres", label: "Offres" },
     { id: "expertises", label: "Expertises" },
-    { id: "realisations", label: "Produits" },
+    { id: "realisations", label: "Réalisations" },
+    { id: "subdomain", label: "Hébergement" },
     { id: "contact", label: "Contact" },
   ];
 
@@ -164,11 +164,11 @@ export default function App() {
             </div>
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-[-0.05em] leading-[0.85] text-white">
-              Nous concevons vos <span className="text-accent italic font-serif lowercase">plateformes IA & SaaS</span>, de l’idée à la production.
+              Nous imaginons les <span className="text-accent italic font-serif lowercase">plateformes intelligentes</span> qui façonnent demain.
             </h1>
 
             <p className="text-neutral-400 text-sm sm:text-base md:text-lg font-medium leading-relaxed max-w-xl opacity-80">
-              Applications métier, automatisation et infrastructures sécurisées pour transformer une contrainte opérationnelle en avantage concret.
+              SOIBY développe des technologies de nouvelle génération intégrant Intelligence Artificielle, Blockchain, Cloud et automatisation pour transformer la finance, la santé et la gestion d'entreprise.
             </p>
 
             {/* Slogan styled elegantly with serif italics */}
@@ -178,10 +178,10 @@ export default function App() {
 
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <button 
-                onClick={() => scrollToSection("contact")}
+                onClick={() => scrollToSection("expertises")}
                 className="flex items-center justify-center gap-3 bg-accent hover:bg-accent-hover text-white font-black uppercase tracking-[0.2em] text-xs py-4 px-8 rounded-none transition-all border border-accent shadow-lg shadow-accent/15 hover:-translate-y-0.5"
               >
-                Parler de mon projet
+                Découvrir SOIBY
                 <ArrowRight size={14} />
               </button>
               <button 
@@ -321,13 +321,13 @@ export default function App() {
             className="text-left max-w-3xl space-y-3"
           >
             <span className="text-[10px] font-black text-accent uppercase tracking-[0.25em]">
-              03 / PRODUITS SOIBY
+              02 / PLATEFORMES OPÉRATIONNELLES
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.9] text-white">
-              Nos produits
+              Nos Réalisations
             </h2>
             <p className="text-neutral-400 text-sm sm:text-base leading-relaxed opacity-80">
-              Quatre plateformes en ligne, conçues pour répondre à des besoins concrets de pilotage, de communication et de santé.
+              Découvrez les briques applicatives prêtes à être déployées et personnalisées selon vos exigences stratégiques.
             </p>
           </motion.div>
 
@@ -371,7 +371,7 @@ export default function App() {
             className="max-w-3xl"
           >
             <span className="text-[10px] font-black text-accent uppercase tracking-[0.25em]">
-              06 / LANCEZ VOTRE PROJET
+              03 / LANCEZ VOTRE PROJET
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.9] text-white mt-2">
               Discutons de vos besoins

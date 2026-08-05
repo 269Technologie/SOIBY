@@ -89,13 +89,13 @@ export default function SubdomainChecker() {
       <div className="space-y-4">
         <div>
           <span className="text-[10px] font-black text-accent uppercase tracking-[0.2em]">
-            Démonstration interactive
+            Infrastructure Instantanée
           </span>
           <h3 className="text-2xl font-black text-white mt-1 uppercase tracking-tight">
-            Explorez un déploiement <code className="text-accent">.soiby.fr</code>
+            Réservez votre Subdomain <code className="text-accent">.soiby.fr</code>
           </h3>
           <p className="text-sm text-neutral-400 mt-2 max-w-xl leading-relaxed opacity-80 font-medium">
-            Découvrez le parcours prévu pour une infrastructure managée. Cette démonstration ne réserve aucun domaine et ne lance aucune ressource réelle.
+            Toutes nos solutions intègrent l'hébergement haut de gamme managé automatiquement. Saisissez le nom de votre projet ou entreprise pour simuler son déploiement.
           </p>
         </div>
 
@@ -165,7 +165,7 @@ export default function SubdomainChecker() {
                       onClick={triggerDeploy}
                       className="bg-accent hover:bg-accent-hover text-white font-black uppercase tracking-[0.2em] px-4 py-2.5 rounded-none text-[10px] shadow-lg shadow-accent/10 transition-all cursor-pointer"
                     >
-                      Voir la simulation
+                      Simuler le déploiement
                     </button>
                   </div>
                 </div>
@@ -235,9 +235,9 @@ export default function SubdomainChecker() {
                 <Sparkles size={24} />
               </div>
               <div className="space-y-1">
-                <h4 className="text-lg font-bold text-white">Simulation terminée</h4>
+                <h4 className="text-lg font-bold text-white">Déploiement Terminé !</h4>
                 <p className="text-sm text-neutral-400 max-w-md mx-auto leading-relaxed">
-                  Voici l’adresse envisagée : <strong className="text-white font-semibold">{subdomain}.soiby.fr</strong>. Un déploiement réel nécessite ensuite la validation du projet et la configuration de son infrastructure.
+                  Votre plateforme est initialisée à l'adresse <strong className="text-white font-semibold">{subdomain}.soiby.fr</strong>. Notre architecture hybride Cloud/Blockchain est prête à accueillir votre production.
                 </p>
               </div>
               <div className="pt-2 flex justify-center gap-3">
