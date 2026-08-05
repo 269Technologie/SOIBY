@@ -29,7 +29,6 @@ import SubdomainChecker from "./components/SubdomainChecker";
 import ExpertiseSection from "./components/ExpertiseSection";
 import RealisationSection from "./components/RealisationSection";
 import ContactSection from "./components/ContactSection";
-import { FaqSection, OfferSection, ProcessSection } from "./components/CommercialSections";
 
 export default function App() {
   const [isRdvOpen, setIsRdvOpen] = useState(false);
@@ -308,8 +307,6 @@ export default function App() {
         </div>
       </section>
 
-      <OfferSection onContact={() => scrollToSection("contact")} />
-
       {/* 5. Section: Nos Réalisations */}
       <section id="realisations" className="py-24 px-4 sm:px-8 border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto space-y-12">
@@ -342,8 +339,6 @@ export default function App() {
         </div>
       </section>
 
-      <ProcessSection />
-
       {/* 6. Section: Subdomain check simulator */}
       <section id="subdomain" className="py-24 px-4 sm:px-8 border-t border-white/10 bg-neutral-950/20 relative z-10">
         <div className="max-w-7xl mx-auto">
@@ -357,8 +352,6 @@ export default function App() {
           </motion.div>
         </div>
       </section>
-
-      <FaqSection onContact={() => scrollToSection("contact")} />
 
       {/* 7. Section: Contact */}
       <section id="contact" className="py-24 px-4 sm:px-8 border-t border-white/10 relative z-10">
