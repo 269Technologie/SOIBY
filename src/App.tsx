@@ -71,7 +71,7 @@ export default function App() {
       <CanvasBackground />
 
       {/* 2. Sticky Premium Navigation Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 border-b border-black/10 bg-white/95 text-neutral-950 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-40 border-b border-neutral-200 bg-white text-neutral-950 shadow-[0_8px_24px_rgba(0,0,0,0.10)]">
         <div className="absolute bottom-0 left-0 h-px bg-accent shadow-[0_0_10px_#FF3B30] transition-[width] duration-100" style={{ width: `${scrollProgress}%` }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
           {/* Logo in bold, italic, uppercase style */}
@@ -84,9 +84,9 @@ export default function App() {
   className="flex items-center gap-2 group"
 >
   <img 
-    src="/logo.png" 
+    src="/logoversion.png" 
     alt="SOIBY" 
-    className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+    className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
   />
 
 </a>
@@ -422,9 +422,9 @@ export default function App() {
   className="group inline-flex items-center gap-2 bg-white px-3 py-2"
 >
   <img 
-    src="/logo.png" 
+    src="/logoversion.png" 
     alt="SOIBY" 
-    className="h-12 w-auto object-contain"
+    className="h-14 w-auto object-contain"
   />
 
 </a>
