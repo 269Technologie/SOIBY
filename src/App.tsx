@@ -20,7 +20,9 @@ import {
   X,
   ShieldCheck,
   Gauge,
-  CloudCog
+  CloudCog,
+  Facebook,
+  MessageCircle
 } from "lucide-react";
 import CanvasBackground from "./components/CanvasBackground";
 import { motion } from "motion/react";
@@ -29,6 +31,11 @@ import SubdomainChecker from "./components/SubdomainChecker";
 import ExpertiseSection from "./components/ExpertiseSection";
 import RealisationSection from "./components/RealisationSection";
 import ContactSection from "./components/ContactSection";
+
+const SITE_URL = "https://soiby.fr/";
+const SHARE_MESSAGE = "Découvrez SOIBY, créateur de plateformes intelligentes :";
+const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(`${SHARE_MESSAGE} ${SITE_URL}`)}`;
+const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}`;
 
 export default function App() {
   const [isRdvOpen, setIsRdvOpen] = useState(false);
@@ -458,6 +465,26 @@ export default function App() {
               </a>
               <a href="https://twitter.com" target="_blank" rel="noreferrer" className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all" aria-label="Twitter">
                 <Twitter size={16} />
+              </a>
+              <a
+                href={facebookShareUrl}
+                target="_blank"
+                rel="noreferrer"
+                title="Partager sur Facebook ou Messenger"
+                className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all"
+                aria-label="Partager le site SOIBY sur Facebook ou Messenger"
+              >
+                <Facebook size={16} />
+              </a>
+              <a
+                href={whatsappShareUrl}
+                target="_blank"
+                rel="noreferrer"
+                title="Partager sur WhatsApp"
+                className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all"
+                aria-label="Partager le site SOIBY sur WhatsApp"
+              >
+                <MessageCircle size={16} />
               </a>
             </div>
           </div>
