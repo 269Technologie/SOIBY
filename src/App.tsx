@@ -32,7 +32,7 @@ import ExpertiseSection from "./components/ExpertiseSection";
 import RealisationSection from "./components/RealisationSection";
 import ContactSection from "./components/ContactSection";
 
-const SITE_URL = "https://soiby.fr/?share=og3";
+const SITE_URL = "https://soiby.fr";
 const SHARE_MESSAGE = "Découvrez SOIBY, créateur de plateformes intelligentes :";
 const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(`${SHARE_MESSAGE} ${SITE_URL}`)}`;
 
@@ -40,6 +40,7 @@ export default function App() {
   const [isRdvOpen, setIsRdvOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [messengerNotice, setMessengerNotice] = useState(false);
 
   const navItems = [
     { id: "expertises", label: "Expertises" },
@@ -72,22 +73,12 @@ export default function App() {
   };
 
   const shareToMessenger = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "SOIBY - Plateformes Intelligentes",
-          text: SHARE_MESSAGE,
-          url: SITE_URL,
-        });
-        return;
-      } catch (error) {
-        if (error instanceof DOMException && error.name === "AbortError") return;
-      }
-    }
-
+    const message = `${SHARE_MESSAGE} ${SITE_URL}`;
     window.open("https://www.messenger.com/", "_blank", "noopener,noreferrer");
     try {
-      await navigator.clipboard.writeText(`${SHARE_MESSAGE} ${SITE_URL}`);
+      await navigator.clipboard.writeText(message);
+      setMessengerNotice(true);
+      window.setTimeout(() => setMessengerNotice(false), 5000);
     } catch {
       // Messenger remains available even when clipboard access is denied.
     }
@@ -507,6 +498,11 @@ export default function App() {
                 <MessageCircle size={16} />
               </a>
             </div>
+            {messengerNotice && (
+              <p role="status" className="max-w-xs text-[10px] font-bold leading-relaxed text-neutral-400">
+                Message copié. Choisissez une discussion Messenger, puis collez-le.
+              </p>
+            )}
           </div>
 
           {/* Col 2: Solutions (Lg span 2) */}
