@@ -37,8 +37,6 @@ export default function App() {
   const [isRdvOpen, setIsRdvOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [messengerNotice, setMessengerNotice] = useState(false);
-  const [isFacebookMenuOpen, setIsFacebookMenuOpen] = useState(false);
 
   const navItems = [
     { id: "expertises", label: "Expertises" },
@@ -67,18 +65,6 @@ export default function App() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
-    }
-  };
-
-  const shareToMessenger = async () => {
-    const message = `${SHARE_MESSAGE} ${SITE_URL}`;
-    window.open("https://www.messenger.com/", "_blank", "noopener,noreferrer");
-    try {
-      await navigator.clipboard.writeText(message);
-      setMessengerNotice(true);
-      window.setTimeout(() => setMessengerNotice(false), 5000);
-    } catch {
-      // Messenger remains available even when clipboard access is denied.
     }
   };
 
@@ -464,44 +450,16 @@ export default function App() {
 
             {/* Social Icons */}
             <div className="flex items-center gap-3">
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => setIsFacebookMenuOpen((open) => !open)}
-                  title="Partager sur Facebook"
-                  className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all"
-                  aria-label="Choisir un mode de partage Facebook"
-                  aria-expanded={isFacebookMenuOpen}
-                  aria-haspopup="menu"
-                >
-                  <Facebook size={16} />
-                </button>
-                {isFacebookMenuOpen && (
-                  <div role="menu" className="absolute bottom-12 left-0 z-20 w-56 border border-white/10 bg-neutral-950 p-1 shadow-2xl">
-                    <a
-                      href={facebookPostUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      role="menuitem"
-                      onClick={() => setIsFacebookMenuOpen(false)}
-                      className="flex items-center gap-3 px-3 py-3 text-[10px] font-black uppercase tracking-wider text-neutral-300 transition-colors hover:bg-accent hover:text-white"
-                    >
-                      <Facebook size={15} /> Publier sur Facebook
-                    </a>
-                    <button
-                      type="button"
-                      role="menuitem"
-                      onClick={() => {
-                        setIsFacebookMenuOpen(false);
-                        void shareToMessenger();
-                      }}
-                      className="flex w-full items-center gap-3 px-3 py-3 text-left text-[10px] font-black uppercase tracking-wider text-neutral-300 transition-colors hover:bg-accent hover:text-white"
-                    >
-                      <MessageCircle size={15} /> Envoyer via Messenger
-                    </button>
-                  </div>
-                )}
-              </div>
+              <a
+                href={facebookPostUrl}
+                target="_blank"
+                rel="noreferrer"
+                title="Publier sur Facebook"
+                className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all"
+                aria-label="Publier le site SOIBY sur Facebook"
+              >
+                <Facebook size={16} />
+              </a>
               <a
                 href={whatsappShareUrl}
                 target="_blank"
@@ -513,11 +471,6 @@ export default function App() {
                 <MessageCircle size={16} />
               </a>
             </div>
-            {messengerNotice && (
-              <p role="status" className="max-w-xs text-[10px] font-bold leading-relaxed text-neutral-400">
-                Message copié. Choisissez une discussion Messenger, puis collez-le.
-              </p>
-            )}
           </div>
 
           {/* Col 2: Solutions (Lg span 2) */}
