@@ -35,7 +35,6 @@ import ContactSection from "./components/ContactSection";
 const SITE_URL = "https://soiby.fr/";
 const SHARE_MESSAGE = "Découvrez SOIBY, créateur de plateformes intelligentes :";
 const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(`${SHARE_MESSAGE} ${SITE_URL}`)}`;
-const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}`;
 
 export default function App() {
   const [isRdvOpen, setIsRdvOpen] = useState(false);
@@ -69,6 +68,28 @@ export default function App() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
+    }
+  };
+
+  const shareToMessenger = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "SOIBY - Plateformes Intelligentes",
+          text: SHARE_MESSAGE,
+          url: SITE_URL,
+        });
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+      }
+    }
+
+    window.open("https://www.messenger.com/", "_blank", "noopener,noreferrer");
+    try {
+      await navigator.clipboard.writeText(`${SHARE_MESSAGE} ${SITE_URL}`);
+    } catch {
+      // Messenger remains available even when clipboard access is denied.
     }
   };
 
@@ -466,16 +487,15 @@ export default function App() {
               <a href="https://twitter.com" target="_blank" rel="noreferrer" className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all" aria-label="Twitter">
                 <Twitter size={16} />
               </a>
-              <a
-                href={facebookShareUrl}
-                target="_blank"
-                rel="noreferrer"
-                title="Partager sur Facebook ou Messenger"
+              <button
+                type="button"
+                onClick={() => void shareToMessenger()}
+                title="Envoyer dans une discussion Messenger"
                 className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all"
-                aria-label="Partager le site SOIBY sur Facebook ou Messenger"
+                aria-label="Envoyer le site SOIBY dans une discussion Messenger"
               >
                 <Facebook size={16} />
-              </a>
+              </button>
               <a
                 href={whatsappShareUrl}
                 target="_blank"
