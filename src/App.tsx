@@ -28,7 +28,7 @@ import ExpertiseSection from "./components/ExpertiseSection";
 import RealisationSection from "./components/RealisationSection";
 import ContactSection from "./components/ContactSection";
 
-const SITE_URL = "https://soiby.fr";
+const SITE_URL = "https://soiby.fr/";
 const SHARE_MESSAGE = "Découvrez SOIBY, créateur de plateformes intelligentes :";
 const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(`${SHARE_MESSAGE} ${SITE_URL}`)}`;
 const facebookPostUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}`;
