@@ -32,7 +32,7 @@ import ExpertiseSection from "./components/ExpertiseSection";
 import RealisationSection from "./components/RealisationSection";
 import ContactSection from "./components/ContactSection";
 
-const SITE_URL = "https://soiby.fr/";
+const SITE_URL = "https://soiby.fr/?share=og3";
 const SHARE_MESSAGE = "Découvrez SOIBY, créateur de plateformes intelligentes :";
 const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(`${SHARE_MESSAGE} ${SITE_URL}`)}`;
 
