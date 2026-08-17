@@ -9,10 +9,6 @@ import {
   ArrowRight, 
   HelpCircle, 
   FileText, 
-  Linkedin, 
-  Github, 
-  Youtube, 
-  Twitter, 
   Zap,
   Mail,
   ChevronRight,
@@ -35,12 +31,14 @@ import ContactSection from "./components/ContactSection";
 const SITE_URL = "https://soiby.fr";
 const SHARE_MESSAGE = "Découvrez SOIBY, créateur de plateformes intelligentes :";
 const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(`${SHARE_MESSAGE} ${SITE_URL}`)}`;
+const facebookPostUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}`;
 
 export default function App() {
   const [isRdvOpen, setIsRdvOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [messengerNotice, setMessengerNotice] = useState(false);
+  const [isFacebookMenuOpen, setIsFacebookMenuOpen] = useState(false);
 
   const navItems = [
     { id: "expertises", label: "Expertises" },
@@ -466,27 +464,44 @@ export default function App() {
 
             {/* Social Icons */}
             <div className="flex items-center gap-3">
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all" aria-label="LinkedIn">
-                <Linkedin size={16} />
-              </a>
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all" aria-label="GitHub">
-                <Github size={16} />
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all" aria-label="YouTube">
-                <Youtube size={16} />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all" aria-label="Twitter">
-                <Twitter size={16} />
-              </a>
-              <button
-                type="button"
-                onClick={() => void shareToMessenger()}
-                title="Envoyer dans une discussion Messenger"
-                className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all"
-                aria-label="Envoyer le site SOIBY dans une discussion Messenger"
-              >
-                <Facebook size={16} />
-              </button>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsFacebookMenuOpen((open) => !open)}
+                  title="Partager sur Facebook"
+                  className="p-2 bg-white/[0.03] border border-white/10 hover:border-accent hover:text-accent rounded-none transition-all"
+                  aria-label="Choisir un mode de partage Facebook"
+                  aria-expanded={isFacebookMenuOpen}
+                  aria-haspopup="menu"
+                >
+                  <Facebook size={16} />
+                </button>
+                {isFacebookMenuOpen && (
+                  <div role="menu" className="absolute bottom-12 left-0 z-20 w-56 border border-white/10 bg-neutral-950 p-1 shadow-2xl">
+                    <a
+                      href={facebookPostUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      role="menuitem"
+                      onClick={() => setIsFacebookMenuOpen(false)}
+                      className="flex items-center gap-3 px-3 py-3 text-[10px] font-black uppercase tracking-wider text-neutral-300 transition-colors hover:bg-accent hover:text-white"
+                    >
+                      <Facebook size={15} /> Publier sur Facebook
+                    </a>
+                    <button
+                      type="button"
+                      role="menuitem"
+                      onClick={() => {
+                        setIsFacebookMenuOpen(false);
+                        void shareToMessenger();
+                      }}
+                      className="flex w-full items-center gap-3 px-3 py-3 text-left text-[10px] font-black uppercase tracking-wider text-neutral-300 transition-colors hover:bg-accent hover:text-white"
+                    >
+                      <MessageCircle size={15} /> Envoyer via Messenger
+                    </button>
+                  </div>
+                )}
+              </div>
               <a
                 href={whatsappShareUrl}
                 target="_blank"
