@@ -36,7 +36,7 @@ function Cta({ children, outline = false }: { children: ReactNode; outline?: boo
   return <a href="#contact" className={`landing-cta ${outline ? "landing-cta-outline" : ""}`}>{children}<ArrowRight size={17} /></a>;
 }
 
-export default function LandingMaquette() {
+export default function LandingMaquette({ onOpenRdv }: { onOpenRdv: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
   const [mobileProjectsPage, setMobileProjectsPage] = useState<0 | 1>(0);
@@ -62,11 +62,11 @@ export default function LandingMaquette() {
             <a href="#parcours">Création de site <ChevronDown size={14} /></a><a href="#expertises">Solutions <ChevronDown size={14} /></a>
             <a href="#cloud">SOIBY Cloud</a><a href="#equipe">L’équipe</a><a href="#contact">Contact</a>
           </nav>
-          <div className="header-actions"><a className="login-btn" href="#contact"><CircleUserRound size={17} />Se connecter</a><a className="appointment-btn" href="#contact"><CalendarDays size={17} />Prendre rendez-vous</a></div>
+          <div className="header-actions"><a className="login-btn" href="#contact"><CircleUserRound size={17} />Se connecter</a><button type="button" className="appointment-btn" onClick={onOpenRdv}><CalendarDays size={17} />Prendre rendez-vous</button></div>
           <a className="mobile-account" href="#contact" aria-label="Se connecter"><CircleUserRound /></a>
           <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button>
         </div>
-        {menuOpen && <nav className="mobile-nav"><a href="#accueil">Accueil</a><a href="#realisations">Nos réalisations</a><a href="#expertises">Solutions</a><a href="#cloud">SOIBY Cloud</a><a href="#equipe">L’équipe</a><a href="#contact">Contact</a><a href="#contact">Prendre rendez-vous</a></nav>}
+        {menuOpen && <nav className="mobile-nav"><a href="#accueil">Accueil</a><a href="#realisations">Nos réalisations</a><a href="#expertises">Solutions</a><a href="#cloud">SOIBY Cloud</a><a href="#equipe">L’équipe</a><a href="#contact">Contact</a><button type="button" onClick={() => { setMenuOpen(false); onOpenRdv(); }}>Prendre rendez-vous</button></nav>}
       </header>
 
       <main>
@@ -109,7 +109,7 @@ export default function LandingMaquette() {
 
         <section className="content-section testimonials"><SectionTitle label="Ils nous font confiance"><span className="sr-only">Témoignages</span></SectionTitle><div>{[["Amina M.","Directrice d’entreprise","SOIBY a créé notre site et notre plateforme de gestion. Une équipe réactive, professionnelle et à l’écoute."],["Laurent P.","Consultant","Un accompagnement de A à Z. Mon site est rapide, bien référencé et je gagne de nouveaux clients chaque semaine."],["Samuel K.","Fondateur de startup","Plus qu’un prestataire, SOIBY est un véritable partenaire technologique. Je recommande sans hésiter."]].map(([name,role,text],i)=><blockquote key={name}><span className={`avatar avatar-${i}`}><img src="/equipe-studio.png" alt="" /></span><div><p>« {text} »</p><footer><b>{name}</b><small>{role}</small><span>{[1,2,3,4,5].map(x=><Star key={x} fill="currentColor" />)}</span></footer></div></blockquote>)}</div></section>
 
-        <section id="contact" className="content-section final-cta"><h2>Donnez vie à votre projet digital<br />avec SOIBY</h2><div className="service-icons">{[[Monitor,"Site web"],[Smartphone,"Application mobile"],[Layers3,"Plateforme SaaS"],[Cloud,"Hébergement & Cloud"],[Bot,"IA & Automatisation"]].map(([Icon,label])=>{const I=Icon as typeof Monitor;return <span key={String(label)}><I />{String(label)}</span>})}</div><a href="mailto:contact@soiby.fr"><CalendarDays />Prendre rendez-vous<ArrowRight /></a></section>
+        <section id="contact" className="content-section final-cta"><h2>Donnez vie à votre projet digital<br />avec SOIBY</h2><div className="service-icons">{[[Monitor,"Site web"],[Smartphone,"Application mobile"],[Layers3,"Plateforme SaaS"],[Cloud,"Hébergement & Cloud"],[Bot,"IA & Automatisation"]].map(([Icon,label])=>{const I=Icon as typeof Monitor;return <span key={String(label)}><I />{String(label)}</span>})}</div><button type="button" onClick={onOpenRdv}><CalendarDays />Prendre rendez-vous<ArrowRight /></button></section>
       </main>
       <footer className="site-footer"><img src="/logoversion.png" alt="SOIBY" /><p>© 2026 SOIBY SAS — Studio technologique</p><nav><a href="#">Mentions légales</a><a href="#">Confidentialité</a></nav></footer>
     </div>
