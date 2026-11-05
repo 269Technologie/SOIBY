@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import type { ReactNode } from "react";
 import {
   ArrowRight, Blocks, Bot, CalendarDays, Check, ChevronDown, CircleUserRound, Cloud,
   BarChart3, Bitcoin, Car, ExternalLink, HeartPulse, Laptop, Layers3, Menu, Monitor, Rocket,
-  Pause, Play, ShieldCheck, Smartphone, Sparkles, Star, Store, UsersRound, X, Zap,
+  ShieldCheck, Smartphone, Sparkles, Star, Store, UsersRound, X, Zap,
 } from "lucide-react";
 
 const expertises = [
@@ -38,19 +38,7 @@ function Cta({ children, outline = false }: { children: ReactNode; outline?: boo
 
 export default function LandingMaquette({ onOpenRdv }: { onOpenRdv: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
   const [mobileProjectsPage, setMobileProjectsPage] = useState<0 | 1>(0);
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
-
-  const toggleMobileVideo = () => {
-    const video = mobileVideoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      void video.play();
-    } else {
-      video.pause();
-    }
-  };
   return (
     <div className="soiby-page">
       <header className="site-header">
@@ -79,12 +67,11 @@ export default function LandingMaquette({ onOpenRdv }: { onOpenRdv: () => void }
                 Votre navigateur ne prend pas en charge la lecture de cette vidéo.
               </video>
             </div>
-            <button type="button" className="mobile-video-control" onClick={toggleMobileVideo} aria-label={mobileVideoPlaying ? "Mettre la vidéo en pause" : "Lire la vidéo"}>
-              <video ref={mobileVideoRef} className="mobile-mini-video" playsInline preload="metadata" onPlay={() => setMobileVideoPlaying(true)} onPause={() => setMobileVideoPlaying(false)}>
+            <div className="mobile-video-control">
+              <video className="mobile-mini-video" autoPlay loop muted playsInline preload="auto" aria-label="Présentation vidéo SOIBY">
                 <source src="/mobile.mp4" type="video/mp4" />
               </video>
-              <span className="mobile-video-state" aria-hidden="true">{mobileVideoPlaying ? <Pause /> : <Play />}</span>
-            </button>
+            </div>
           </div>
           <div className="stat-bar">{[
             { n: "6", l: "Plateformes en production", Icon: Layers3 },
