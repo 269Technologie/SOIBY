@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import {
   ArrowRight, Blocks, Bot, CalendarDays, Check, ChevronDown, CircleUserRound, Cloud,
   BarChart3, Bitcoin, Car, ExternalLink, HeartPulse, Laptop, Layers3, Menu, Monitor, Rocket,
-  ShieldCheck, Smartphone, Sparkles, Star, Store, UsersRound, X, Zap,
+  ShieldCheck, Smartphone, Sparkles, Store, UsersRound, X, Zap,
 } from "lucide-react";
 
 const expertises = [
@@ -60,7 +60,7 @@ export default function LandingMaquette({ onOpenRdv }: { onOpenRdv: () => void }
       <main>
         <section id="accueil" className="hero-section">
           <div className="hero-grid">
-            <div className="hero-copy"><span className="hero-pill">Studio technologique & éditeur de plateformes</span><h1>Nous créons nos propres plateformes.<br /><em>Nous construisons la vôtre.</em></h1><p>De la création de site web à la plateforme métier complexe, SOIBY conçoit, développe et exploite des solutions numériques performantes, sécurisées et évolutives.</p><div className="hero-actions"><Cta><Monitor size={20} />Créer mon site</Cta><Cta outline><Rocket size={20} />Développer mon projet</Cta></div></div>
+            <div className="hero-copy"><span className="hero-pill">Studio technologique & éditeur de plateformes</span><h1>Nous créons nos propres plateformes.<br /><em>Nous construisons votre site dès 149 € HT.</em></h1><p>De la création de site web à la plateforme métier complexe, SOIBY conçoit, développe et exploite des solutions numériques performantes, sécurisées et évolutives.</p><div className="hero-actions"><Cta><Monitor size={20} />Créer mon site</Cta><Cta outline><Rocket size={20} />Développer mon projet</Cta></div></div>
             <div className="video-card">
               <video autoPlay loop muted playsInline preload="auto" poster="/hero-mobile-v2.png" aria-label="Présentation vidéo du studio technologique SOIBY">
                 <source src="/videos.mp4" type="video/mp4" />
@@ -94,7 +94,6 @@ export default function LandingMaquette({ onOpenRdv }: { onOpenRdv: () => void }
 
         <section id="parcours" className="content-section"><SectionTitle label="Deux parcours, un objectif : votre réussite"><span className="sr-only">Nos parcours</span></SectionTitle><div className="journey-grid"><article><Monitor /><div><h3>Je veux créer mon site</h3><p>Un site moderne, rapide et optimisé pour votre activité (vitrine, e-commerce, réservation, blog…).</p><Cta>Créer mon site</Cta></div><img className="journey-device" src="/parcours/creation-site.png" alt="Aperçu d’un site professionnel sur ordinateur" /></article><article><Rocket /><div><h3>Je veux développer mon projet</h3><p>Une application web, mobile ou une plateforme métier (SaaS, FinTech, IA, santé, mobilité…).</p><Cta>Développer mon projet</Cta></div><img className="journey-device" src="/parcours/developpement-application.png" alt="Application présentée sur tablette et téléphone" /></article></div></section>
 
-        <section className="content-section testimonials"><SectionTitle label="Ils nous font confiance"><span className="sr-only">Témoignages</span></SectionTitle><div>{[["Amina M.","Directrice d’entreprise","SOIBY a créé notre site et notre plateforme de gestion. Une équipe réactive, professionnelle et à l’écoute."],["Laurent P.","Consultant","Un accompagnement de A à Z. Mon site est rapide, bien référencé et je gagne de nouveaux clients chaque semaine."],["Samuel K.","Fondateur de startup","Plus qu’un prestataire, SOIBY est un véritable partenaire technologique. Je recommande sans hésiter."]].map(([name,role,text],i)=><blockquote key={name}><span className={`avatar avatar-${i}`}><img src="/equipe-studio.png" alt="" /></span><div><p>« {text} »</p><footer><b>{name}</b><small>{role}</small><span>{[1,2,3,4,5].map(x=><Star key={x} fill="currentColor" />)}</span></footer></div></blockquote>)}</div></section>
 
         <section id="contact" className="content-section final-cta"><h2>Donnez vie à votre projet digital<br />avec SOIBY</h2><div className="service-icons">{[[Monitor,"Site web"],[Smartphone,"Application mobile"],[Layers3,"Plateforme SaaS"],[Cloud,"Hébergement & Cloud"],[Bot,"IA & Automatisation"]].map(([Icon,label])=>{const I=Icon as typeof Monitor;return <span key={String(label)}><I />{String(label)}</span>})}</div><button type="button" onClick={onOpenRdv}><CalendarDays />Prendre rendez-vous<ArrowRight /></button></section>
       </main>
