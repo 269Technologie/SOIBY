@@ -60,7 +60,7 @@ export default function LandingMaquette({ onOpenRdv }: { onOpenRdv: () => void }
       <main>
         <section id="accueil" className="hero-section">
           <div className="hero-grid">
-            <div className="hero-copy"><span className="hero-pill">Studio technologique & éditeur de plateformes</span><h1>Nous créons nos propres plateformes.<br /><em>Nous construisons votre site dès 149 € HT.</em></h1><p>De la création de site web à la plateforme métier complexe, SOIBY conçoit, développe et exploite des solutions numériques performantes, sécurisées et évolutives.</p><div className="hero-actions"><Cta><Monitor size={20} />Créer mon site</Cta><Cta outline><Rocket size={20} />Développer mon projet</Cta></div></div>
+            <div className="hero-copy"><span className="hero-pill">Studio technologique & éditeur de plateformes</span><h1>Nous créons nos propres plateformes.<br /><em>Nous construisons votre site dès <span style={{ whiteSpace: "nowrap" }}>149 € HT</span>.</em></h1><p>De la création de site web à la plateforme métier complexe, SOIBY conçoit, développe et exploite des solutions numériques performantes, sécurisées et évolutives.</p><div className="hero-actions"><Cta><Monitor size={20} />Créer mon site</Cta><Cta outline><Rocket size={20} />Développer mon projet</Cta></div></div>
             <div className="video-card">
               <video autoPlay loop muted playsInline preload="auto" poster="/hero-mobile-v2.png" aria-label="Présentation vidéo du studio technologique SOIBY">
                 <source src="/videos.mp4" type="video/mp4" />
