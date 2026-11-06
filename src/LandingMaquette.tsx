@@ -18,7 +18,6 @@ const produits = [
   { nom: "Caisse Solidarité Maladie", logo: "/logo_caisse.png", image: "/realisations/caisse-solidarite.png", texte: "Un carnet de santé numérique.", nombre: "+12 000", unite: "dossiers santé", url: "caissesolidaritemaladie.com", couleur: "from-[#11a442] to-[#075124]", type: "phone" },
   { nom: "Coontrool", logo: "", image: "/realisations/coontrool.png", texte: "Gestion, suivi et contrôle de caisse à distance.", nombre: "+3 500", unite: "commerces", url: "coontrool.com", couleur: "from-[#a210cf] to-[#41075f]", type: "dashboard" },
   { nom: "SMSCovoit", logo: "/logo_covoit.png", image: "/realisations/smscovoit.png", texte: "Une plateforme de covoiturage simple et fiable.", nombre: "+50 000", unite: "trajets", url: "smscovoit.com", couleur: "from-[#05a9b8] to-[#005269]", type: "map" },
-  { nom: "HALIMA", logo: "", image: "/realisations/halima.png", texte: "Agent IA entrepreneurial, conseil business et lifestyle.", nombre: "+10 000", unite: "utilisateurs", url: "halima.ai", couleur: "from-[#ed1683] to-[#710640]", type: "assistant" },
 ];
 
 const forces = [
