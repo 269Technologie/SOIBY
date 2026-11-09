@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import MobileLanding from "./components/MobileLanding";
 import type { ReactNode } from "react";
 import {
   ArrowRight, Blocks, Bot, CalendarDays, Check, ChevronDown, CircleUserRound, Cloud,
@@ -35,7 +36,26 @@ function Cta({ children, outline = false }: { children: ReactNode; outline?: boo
   return <a href="#contact" className={`landing-cta ${outline ? "landing-cta-outline" : ""}`}>{children}<ArrowRight size={17} /></a>;
 }
 
+const MOBILE_QUERY = "(max-width: 680px)";
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.matchMedia(MOBILE_QUERY).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const update = () => setIsMobile(mq.matches);
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return isMobile;
+}
+
 export default function LandingMaquette({ onOpenRdv }: { onOpenRdv: () => void }) {
+  const isMobile = useIsMobile();
+  if (isMobile) return <MobileLanding onOpenRdv={onOpenRdv} />;
+  return <DesktopLanding onOpenRdv={onOpenRdv} />;
+}
+
+function DesktopLanding({ onOpenRdv }: { onOpenRdv: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileProjectsPage, setMobileProjectsPage] = useState<0 | 1>(0);
   return (
