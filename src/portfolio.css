@@ -1,0 +1,52 @@
+/* Portfolio interactif — fenêtre modale d'une réalisation. */
+.pf-overlay { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 16px; background: rgb(6 14 40 / .78); backdrop-filter: blur(5px); font-family: Ubuntu, "Barlow Semi Condensed", system-ui, sans-serif; }
+.pf-overlay *, .pf-overlay *::before, .pf-overlay *::after { box-sizing: border-box; }
+.pf-card { --pf-w: min(100%, calc((100vh - 332px) * 1.6)); width: min(1120px, 100%); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; padding: 18px 22px 20px; border-radius: 22px; color: #fff; background: #0b1a4a; box-shadow: 0 24px 70px rgb(0 0 20 / .55); animation: pf-in .2s ease-out; }
+@keyframes pf-in { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: none; } }
+
+@supports (height: 100dvh) { .pf-card { --pf-w: min(100%, calc((100dvh - 332px) * 1.6)); } }
+.pf-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.pf-head > div { flex: 1; min-width: 0; }
+.pf-head h2 { margin: 0; font-size: clamp(20px, 2.4vw, 28px); font-weight: 700; line-height: 1.15; }
+.pf-head p { margin: 3px 0 0; color: #b8c4ea; font-size: 14px; }
+.pf-visit { flex: none; display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border: 1.5px solid rgb(255 255 255 / .35); border-radius: 999px; color: #fff; font-size: 14px; font-weight: 500; text-decoration: none; }
+.pf-visit:hover { background: rgb(255 255 255 / .12); }
+.pf-visit svg { width: 15px; height: 15px; }
+.pf-close { flex: none; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; color: #fff; background: #f2061d; cursor: pointer; box-shadow: 0 6px 16px rgb(242 6 29 / .4); }
+.pf-close:hover { filter: brightness(1.1); }
+.pf-close svg { width: 22px; height: 22px; }
+
+/* Grande capture */
+.pf-stage { position: relative; width: var(--pf-w); min-width: min(100%, 420px); margin-inline: auto; aspect-ratio: 16 / 10; overflow: hidden; border: 2px solid rgb(255 255 255 / .18); border-radius: 14px; background: #060e28; }
+.pf-stage > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; animation: pf-fade .25s ease-out; }
+@keyframes pf-fade { from { opacity: .35; } to { opacity: 1; } }
+.pf-nav { position: absolute; top: 50%; width: 42px; height: 42px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; color: #0b1a4a; background: rgb(255 255 255 / .92); box-shadow: 0 4px 14px rgb(0 0 20 / .35); transform: translateY(-50%); cursor: pointer; opacity: .9; }
+.pf-nav:hover { opacity: 1; }
+.pf-nav svg { width: 22px; height: 22px; }
+.pf-prev { left: 12px; }
+.pf-next { right: 12px; }
+
+/* Vignettes des autres pages */
+.pf-thumbs { width: var(--pf-w); min-width: min(100%, 420px); margin: 14px auto 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.pf-thumbs button { width: 100%; display: block; padding: 0; border: 2px solid transparent; border-radius: 12px; overflow: hidden; color: #c9d3f3; background: rgb(255 255 255 / .08); text-align: left; font: inherit; cursor: pointer; transition: border-color .15s, background .15s, transform .15s; }
+.pf-thumbs button:hover { background: rgb(255 255 255 / .16); transform: translateY(-2px); }
+.pf-thumbs button.on { border-color: #f2061d; color: #fff; background: rgb(242 6 29 / .18); }
+.pf-thumbs img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+.pf-thumbs span { display: block; padding: 7px 10px 8px; font-size: 13px; font-weight: 500; line-height: 1.2; }
+.pf-thumbs button.on span { font-weight: 700; }
+
+.pf-overlay :focus-visible { outline: 3px solid #6aa3ff; outline-offset: 2px; }
+
+@media (max-width: 680px) {
+  .pf-overlay { padding: 0; place-items: end stretch; }
+  .pf-card { --pf-w: 100%; max-height: 96dvh; padding: 14px 14px calc(16px + env(safe-area-inset-bottom)); border-radius: 22px 22px 0 0; }
+  .pf-head { gap: 10px; margin-bottom: 10px; }
+  .pf-head p { font-size: 13px; }
+  .pf-visit { display: none; }
+  .pf-close { width: 40px; height: 40px; }
+  .pf-nav { width: 36px; height: 36px; }
+  .pf-nav svg { width: 19px; height: 19px; }
+  .pf-thumbs { margin-top: 10px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .pf-thumbs span { padding: 5px 6px 6px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .pf-card, .pf-stage > img { animation: none; } .pf-thumbs button { transition: none; } }

@@ -114,6 +114,7 @@
 .m-carousel { position: relative; margin-top: calc(var(--u) * 13); }
 .m-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - var(--u) * 8) / 2); gap: calc(var(--u) * 8); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 calc(var(--u) * 3); scroll-padding-inline: calc(var(--u) * 3); }
 .m-track::-webkit-scrollbar { display: none; }
+button.m-card { display: block; padding: 0; border: 0; text-align: left; font: inherit; cursor: pointer; }
 .m-card { position: relative; height: calc(var(--u) * 157); overflow: hidden; scroll-snap-align: start; border-radius: calc(var(--u) * 13); color: #fff; box-shadow: 0 calc(var(--u) * 6) calc(var(--u) * 14) #0b1a3d2e; }
 .m-card-head { position: relative; z-index: 1; margin: calc(var(--u) * 11) 0 0 calc(var(--u) * 21); display: flex; align-items: center; gap: calc(var(--u) * 7); font-size: calc(var(--u) * 22.5); line-height: 1; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; }
 .m-card-head i { width: calc(var(--u) * 23); height: calc(var(--u) * 23); flex: none; display: grid; place-items: center; border-radius: 50%; box-shadow: 0 0 0 calc(var(--u) * 1.5) #ffffffb0; }
@@ -139,6 +140,8 @@
 .m-domain input::placeholder { color: var(--ink); opacity: 1; }
 .m-domain button { width: calc(var(--u) * 52); padding: 0; display: grid; place-items: center; border: 0; color: #fff; background: var(--red); }
 .m-domain button svg { width: calc(var(--u) * 23); height: calc(var(--u) * 23); }
+.m-domain-link { align-items: center; justify-content: center; gap: calc(var(--u) * 9); border-color: var(--red); color: #fff; background: var(--red); font-size: calc(var(--u) * 16.5); font-weight: 700; text-decoration: none; }
+.m-domain-link svg { width: calc(var(--u) * 21); height: calc(var(--u) * 21); }
 .m-cloud-list { margin-top: calc(var(--u) * 10) !important; display: grid; grid-template-columns: 1fr 1.15fr; gap: calc(var(--u) * 7) calc(var(--u) * 6); }
 .m-cloud-list li { display: flex; align-items: center; gap: calc(var(--u) * 8); color: var(--ink); font-size: calc(var(--u) * 14.5); line-height: 1.1; font-weight: 500; white-space: nowrap; }
 

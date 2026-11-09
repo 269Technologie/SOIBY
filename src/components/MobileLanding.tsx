@@ -1,44 +1,34 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, BarChart3, Bitcoin, CalendarDays, Car, Check, ChevronDown, ChevronLeft, ChevronRight,
   Cloud, Facebook, HeartPulse, Info, Instagram, Laptop, Linkedin, Menu, Monitor, Plus, Search, Store, X, Youtube,
 } from "lucide-react";
+import { faq } from "../faq";
+import AutoVideo from "./AutoVideo";
+import SiteFooter from "./SiteFooter";
 
 const produits = [
-  { nom: "WinEdge", texte: "L’épargne indolore en Bitcoin.", image: "/realisations/winedge.png", url: "winedge.io", Icon: Bitcoin, fond: "linear-gradient(160deg,#ffa31a 0%,#f57c0a 55%,#e35d05 100%)", pastille: "#f7931a" },
-  { nom: "Pilote360", texte: "Gestion de trésorerie assistée par IA.", image: "/realisations/pilote360.png", url: "pilote360.io", Icon: BarChart3, fond: "linear-gradient(160deg,#2f7bff 0%,#145df0 55%,#0a3fcf 100%)", pastille: "#1e66f5" },
-  { nom: "Caisse Solidarité", texte: "Un carnet de santé numérique.", image: "/realisations/caisse-solidarite.png", url: "caissesolidaritemaladie.com", Icon: HeartPulse, fond: "linear-gradient(160deg,#22c55e 0%,#13a344 55%,#08782f 100%)", pastille: "#16a34a" },
-  { nom: "Coontrool", texte: "Contrôle de caisse à distance.", image: "/realisations/coontrool.png", url: "coontrool.com", Icon: Store, fond: "linear-gradient(160deg,#b84ef0 0%,#9a1fd6 55%,#6b0fa3 100%)", pastille: "#a21caf" },
-  { nom: "SMSCovoit", texte: "Le covoiturage simple et fiable.", image: "/realisations/smscovoit.png", url: "smscovoit.com", Icon: Car, fond: "linear-gradient(160deg,#18c3d2 0%,#06a3b4 55%,#047688 100%)", pastille: "#0891b2" },
+  { id: "winedge", nom: "WinEdge", texte: "L’épargne indolore en Bitcoin.", image: "/realisations/winedge.png", url: "winedge.io", Icon: Bitcoin, fond: "linear-gradient(160deg,#ffa31a 0%,#f57c0a 55%,#e35d05 100%)", pastille: "#f7931a" },
+  { id: "pilote360", nom: "Pilote360", texte: "Gestion de trésorerie assistée par IA.", image: "/realisations/pilote360.png", url: "pilote360.io", Icon: BarChart3, fond: "linear-gradient(160deg,#2f7bff 0%,#145df0 55%,#0a3fcf 100%)", pastille: "#1e66f5" },
+  { id: "caisse-solidarite", nom: "Caisse Solidarité", texte: "Un carnet de santé numérique.", image: "/realisations/caisse-solidarite.png", url: "caissesolidaritemaladie.com", Icon: HeartPulse, fond: "linear-gradient(160deg,#22c55e 0%,#13a344 55%,#08782f 100%)", pastille: "#16a34a" },
+  { id: "coontrool", nom: "Coontrool", texte: "Contrôle de caisse à distance.", image: "/realisations/coontrool.png", url: "coontrool.com", Icon: Store, fond: "linear-gradient(160deg,#b84ef0 0%,#9a1fd6 55%,#6b0fa3 100%)", pastille: "#a21caf" },
+  { id: "smscovoit", nom: "SMSCovoit", texte: "Le covoiturage simple et fiable.", image: "/realisations/smscovoit.png", url: "smscovoit.com", Icon: Car, fond: "linear-gradient(160deg,#18c3d2 0%,#06a3b4 55%,#047688 100%)", pastille: "#0891b2" },
 ];
 
 const CARDS_PER_PAGE = 2;
 
-const faq = [
-  ["Combien coûte la création d’un site web chez SOIBY ?", "La création d’un site professionnel démarre à 189 € HT. Le prix final dépend du nombre de pages et des fonctionnalités souhaitées ; nous vous remettons un devis clair avant tout démarrage."],
-  ["Que comprend l’offre à 189 € HT ?", "La conception et le développement d’un site moderne et responsive, optimisé pour Google, livré prêt à être mis en ligne. Le nom de domaine et l’hébergement sont proposés à part."],
-  ["Quels types de sites pouvez-vous créer ?", "Sites vitrines, e-commerce, sites de réservation, blogs, landing pages… et, au-delà, des applications web et mobiles ou des plateformes SaaS sur mesure."],
-  ["Quel est le délai de livraison ?", "Un site est livré en 3 à 7 jours ouvrés après réception de vos contenus. Les projets sur mesure font l’objet d’un planning dédié."],
-  ["Le site sera-t-il adapté aux mobiles ?", "Oui. Tous nos sites sont responsive : ils s’adaptent automatiquement aux smartphones, tablettes et ordinateurs."],
-  ["Le référencement Google (SEO) est-il inclus ?", "Oui, l’optimisation SEO de base est incluse : structure des pages, balises, performances et compatibilité mobile."],
-  ["Puis-je modifier mon site après sa livraison ?", "Oui. Nous pouvons faire évoluer votre site à tout moment, et vous pouvez nous confier sa maintenance."],
-  ["Le nom de domaine est-il inclus dans le prix ?", "Non, le prix concerne uniquement la création du site. SOIBY peut réserver votre nom de domaine pour vous."],
-  ["Où sera hébergé mon site ?", "Nous proposons un hébergement performant et sécurisé via SOIBY Cloud, avec certificat SSL et sauvegardes."],
-  ["Proposez-vous des emails professionnels ?", "Oui, nous créons des adresses email à votre nom de domaine (ex. contact@votre-entreprise.fr)."],
-  ["Puis-je transférer un domaine existant chez SOIBY ?", "Oui, nous prenons en charge le transfert de votre nom de domaine existant et la configuration associée."],
-  ["Puis-je demander une application mobile ou une plateforme SaaS ?", "Oui. Notre équipe de 15 développeurs conçoit des applications mobiles, des plateformes SaaS et des solutions métier sur mesure."],
-  ["Comment obtenir un devis pour un projet sur mesure ?", "Prenez rendez-vous avec notre équipe : nous étudions votre besoin et vous envoyons un devis personnalisé."],
-] as const;
 
 function CreateSiteIcon({ size }: { size: number }) {
   return <Monitor size={size} strokeWidth={1.8} aria-hidden="true" />;
 }
 
-export default function MobileLanding({ onOpenRdv }: { onOpenRdv: () => void }) {
+// Réservation et recherche de noms de domaine : gérées sur SOIBY Cloud
+const CLOUD_URL = "https://cloud.soiby.fr";
+
+export default function MobileLanding({ onOpenRdv, onOpenSite, onOpenWork }: { onOpenRdv: () => void; onOpenSite: () => void; onOpenWork: (id: string) => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [page, setPage] = useState(0);
-  const [domain, setDomain] = useState("");
   const trackRef = useRef<HTMLDivElement>(null);
   const pageCount = Math.ceil(produits.length / CARDS_PER_PAGE);
   const pageRef = useRef(0);
@@ -94,22 +84,17 @@ export default function MobileLanding({ onOpenRdv }: { onOpenRdv: () => void }) 
     goTo(target);
   };
 
-  const searchDomain = (e: FormEvent) => {
-    e.preventDefault();
-    onOpenRdv();
-  };
-
   return (
     <div className="m-page">
       <header className="m-header">
         <div className="m-header-inner">
           <a href="#accueil" className="m-logo"><img src="/logoversion.png" alt="SOIBY — Respirez on s’occupe de tout !" /></a>
-          <button type="button" className="m-header-cta" onClick={onOpenRdv}><CreateSiteIcon size={19} />Créer mon site</button>
+          <button type="button" className="m-header-cta" onClick={onOpenSite}><CreateSiteIcon size={19} />Créer mon site</button>
           <button type="button" className="m-burger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" aria-expanded={menuOpen}>{menuOpen ? <X size={30} strokeWidth={2.6} /> : <Menu size={32} strokeWidth={2.8} />}</button>
         </div>
         {menuOpen && <nav className="m-nav" onClick={() => setMenuOpen(false)}>
           <a href="#accueil">Accueil</a><a href="#equipe">L’équipe</a><a href="#realisations">Nos réalisations</a>
-          <a href="#cloud">Nom de domaine & hébergement</a><a href="#faq">FAQ</a>
+          <a href="#cloud">Nom de domaine & hébergement</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
           <button type="button" onClick={onOpenRdv}>Prendre rendez-vous</button>
         </nav>}
       </header>
@@ -123,11 +108,9 @@ export default function MobileLanding({ onOpenRdv }: { onOpenRdv: () => void }) 
             {["Design moderne et responsive", "Optimisé pour Google (SEO)", "Livré en 3 à 7 jours ouvrés"].map(t => <li key={t}><span><Check size={17} strokeWidth={4} /></span>{t}</li>)}
           </ul>
           <div className="m-video">
-            <video controls playsInline preload="metadata" poster="/hero-mobile-v2.png" aria-label="Présentation vidéo SOIBY">
-              <source src="/mobile.mp4" type="video/mp4" />
-            </video>
+            <AutoVideo src="/mobile.mp4" poster="/hero-mobile-v2.png" />
           </div>
-          <button type="button" className="m-cta-main" onClick={onOpenRdv}><Laptop size={46} strokeWidth={1.6} aria-hidden="true" /><span>Créer mon site<br />dès 189&nbsp;€&nbsp;HT <ArrowRight size={26} strokeWidth={2.2} /></span></button>
+          <button type="button" className="m-cta-main" onClick={onOpenSite}><Laptop size={46} strokeWidth={1.6} aria-hidden="true" /><span>Créer mon site<br />dès 189&nbsp;€&nbsp;HT <ArrowRight size={26} strokeWidth={2.2} /></span></button>
           <button type="button" className="m-cta-rdv" onClick={onOpenRdv}><CalendarDays size={40} strokeWidth={1.6} aria-hidden="true" /><span><strong>Prendre rendez-vous</strong><small>Projet sur mesure <ArrowRight size={20} strokeWidth={2} /></small></span></button>
           <p className="m-hero-note"><Info size={16} strokeWidth={2} aria-hidden="true" /> Création du site uniquement,<br />hors nom de domaine et hébergement. Prix HT.</p>
           <a href="#equipe" className="m-scroll" aria-label="Découvrir la suite"><ChevronDown size={30} strokeWidth={3} /></a>
@@ -157,12 +140,12 @@ export default function MobileLanding({ onOpenRdv }: { onOpenRdv: () => void }) 
           <h2 className="m-title">Des plateformes concrètes,<br />utilisées et en production</h2>
           <div className="m-carousel">
             <div className="m-track" ref={trackRef}>
-              {produits.map(({ nom, texte, image, url, Icon, fond, pastille }) => (
-                <a key={nom} className="m-card" href={`https://${url}`} target="_blank" rel="noreferrer" style={{ background: fond }} aria-label={`Découvrir ${nom}`}>
+              {produits.map(({ id, nom, texte, image, Icon, fond, pastille }) => (
+                <button key={nom} type="button" className="m-card" onClick={() => onOpenWork(id)} style={{ background: fond }} aria-label={`Voir les pages du site ${nom}`}>
                   <span className="m-card-head"><i style={{ background: pastille }}><Icon size={14} strokeWidth={3} /></i>{nom}</span>
                   <span className="m-card-text">{texte}</span>
                   <img src={image} alt="" loading="lazy" />
-                </a>
+                </button>
               ))}
             </div>
             <button type="button" className="m-arrow m-arrow-left" onClick={() => userGoTo(page - 1)} aria-label="Réalisations précédentes"><ChevronLeft size={20} strokeWidth={3} /></button>
@@ -177,10 +160,7 @@ export default function MobileLanding({ onOpenRdv }: { onOpenRdv: () => void }) 
             <Cloud size={66} strokeWidth={1.7} aria-hidden="true" />
             <div><h2>SOIBY, c’est aussi</h2><p>la réservation de nom de domaine<br />et l’hébergement de vos projets.</p></div>
           </div>
-          <form className="m-domain" onSubmit={searchDomain}>
-            <input value={domain} onChange={e => setDomain(e.target.value)} placeholder="Votre nom de domaine idéal..." aria-label="Votre nom de domaine idéal" />
-            <button type="submit" aria-label="Rechercher"><Search size={22} strokeWidth={2.6} /></button>
-          </form>
+          <a className="m-domain m-domain-link" href={CLOUD_URL} target="_blank" rel="noopener noreferrer"><Search size={22} strokeWidth={2.6} aria-hidden="true" />Rechercher un nom de domaine</a>
           <ul className="m-cloud-list">
             {["Nom de domaine", "Hébergement web & apps", "Emails professionnels", "Certificat SSL (sécurité)"].map(t => <li key={t}><Check size={19} strokeWidth={3.4} />{t}</li>)}
           </ul>
@@ -206,26 +186,11 @@ export default function MobileLanding({ onOpenRdv }: { onOpenRdv: () => void }) 
               );
             })}
           </ul>
-          <button type="button" className="m-cta-faq" onClick={onOpenRdv}><Laptop size={34} strokeWidth={1.7} aria-hidden="true" />Créer mon site dès 189&nbsp;€&nbsp;HT<ArrowRight size={24} strokeWidth={2.2} /></button>
+          <button type="button" className="m-cta-faq" onClick={onOpenSite}><Laptop size={34} strokeWidth={1.7} aria-hidden="true" />Créer mon site dès 189&nbsp;€&nbsp;HT<ArrowRight size={24} strokeWidth={2.2} /></button>
         </section>
 
 
-        <footer className="m-footer">
-        <div className="m-footer-top">
-          <img src="/logoversion.png" alt="SOIBY" />
-          <nav aria-label="Réseaux sociaux">
-            <a href="#" aria-label="LinkedIn" className="li"><Linkedin size={22} strokeWidth={0} fill="currentColor" /></a>
-            <a href="#" aria-label="YouTube" className="yt"><Youtube size={24} strokeWidth={2} /></a>
-            <a href="#" aria-label="Facebook" className="fb"><Facebook size={22} strokeWidth={0} fill="currentColor" /></a>
-            <a href="#" aria-label="Instagram" className="ig"><Instagram size={24} strokeWidth={2.2} /></a>
-          </nav>
-        </div>
-        <nav className="m-footer-links" aria-label="Liens utiles">
-          <p><a href="#equipe">À propos</a><i>|</i><a href="#realisations">Nos réalisations</a><i>|</i><a href="#faq">FAQ</a><i>|</i><a href="#">Mentions légales</a></p>
-          <p><a href="#">Politique de confidentialité</a><i>|</i><button type="button" onClick={onOpenRdv}>Contact</button></p>
-        </nav>
-        <p className="m-copy">© 2026 SOIBY. Tous droits réservés.</p>
-      </footer>
+        <SiteFooter onOpenRdv={onOpenRdv} onOpenSite={onOpenSite} />
       </div>
       </main>
     </div>
