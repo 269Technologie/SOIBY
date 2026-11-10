@@ -27,10 +27,13 @@ function baseName(input: string) {
 async function check(domain: string): Promise<Row> {
   try {
     const r = await fetch(`${CHECK_URL}?domain=${encodeURIComponent(domain)}`);
-    const data = await r.json().catch(() => ({}));
-    if (!r.ok) return { domain, state: "error", message: data.error ?? "Vérification indisponible." };
-    if (data.status === "available") return { domain, state: "available", price: typeof data.price === "number" ? data.price : null };
-    return { domain, state: data.status === "unsupported" ? "unsupported" : "taken" };
+    const data = await r.json().catch(() => null);
+    if (!r.ok) return { domain, state: "error", message: data?.error ?? "Vérification indisponible." };
+    // Jamais « pris » par défaut : une réponse qui n'est pas celle de l'API (ex. page HTML d'un serveur sans backend) est une erreur.
+    if (data?.status === "available") return { domain, state: "available", price: typeof data.price === "number" ? data.price : null };
+    if (data?.status === "taken") return { domain, state: "taken" };
+    if (data?.status === "unsupported") return { domain, state: "unsupported" };
+    return { domain, state: "error", message: "Vérification indisponible." };
   } catch {
     return { domain, state: "error", message: "Vérification indisponible." };
   }
