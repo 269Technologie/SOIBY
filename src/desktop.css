@@ -2,10 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
 
 .d-page {
-  /* L'échelle suit la largeur OU la hauteur de la fenêtre (la plus contraignante). Le premier écran = en-tête, hero agrandi, équipe,
-     réalisations et FAQ (941 px de maquette) ; le pied de page est toujours sur le deuxième écran (voir .d-main). */
+  /* L'échelle suit la largeur OU la hauteur de la fenêtre (la plus contraignante).
+     Écran 1 = en-tête + hero (toute la hauteur) ; écran 2 = équipe, réalisations, cloud et FAQ (564 px de maquette) ; puis le pied de page. */
   --vh100: 100vh;
-  --u: min(calc(100vw / 1671), calc(var(--vh100) / 941));
+  --u: min(calc(100vw / 1671), calc(var(--vh100) / 564));
+  --u2: min(calc(100vw / 1530), calc(var(--vh100) / 564));   /* écran 2 : éléments agrandis pour remplir la largeur et la hauteur */
   --k: .3715;               /* (ascendante − descendante) / 2 d'Ubuntu : positionne le texte par sa ligne de base */
   --navy: #0b1a4a;
   --red: #f2061d;
@@ -25,7 +26,7 @@
 .d-fill { pointer-events: none; }
 .d-fill > * { pointer-events: auto; }
 /* Le contenu occupe au moins tout l'écran (sous l'en-tête) : le pied de page est donc toujours rejeté sur le deuxième écran. */
-.d-main { flex: 1 1 auto; display: flex; flex-direction: column; min-height: calc(var(--vh100) - var(--u) * 67); }
+.d-main { flex: 1 1 auto; display: flex; flex-direction: column; }
 .d-abs { position: absolute; }
 .d-fill { position: absolute; inset: 0; }
 .d-origin { position: absolute; width: 0; height: 0; }
@@ -54,16 +55,40 @@ a.d-t, button.d-t { border: 0; background: none; font-family: inherit; text-deco
 .d-underline { background: var(--red); border-radius: calc(var(--u) * 1); }
 
 /* Hero */
-.d-hero { background: url(/desktop/hero-l.png) 0 0 / 50% 100% no-repeat, url(/desktop/hero-r.png) 100% 0 / 50% 100% no-repeat, #06174a; }
-.d-herotext { transform: translateY(calc(var(--u) * 33)); }   /* texte à sa taille d'origine, centré dans le hero agrandi */
-.d-herobg { background: url(/desktop/hero-flat.jpg) 0 0 / 100% 100% no-repeat; }
-.d-herovid { display: block; object-fit: cover; object-position: 56% 30%; pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 94%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 94%, transparent 100%); }
+.d-hero { height: max(calc(var(--u) * var(--h)), calc(var(--vh100) - var(--u) * 67)); background: url(/desktop/hero-flat.jpg) 0 0 / 100% 100% no-repeat, #06174a; }   /* écran 1 : en-tête + hero = toute la fenêtre */
+.d-herogrid { position: absolute; z-index: 1; left: calc(50% - var(--u) * 835.5 + var(--u) * 143); top: 50%; width: calc(var(--u) * 1385); display: grid; grid-template-columns: calc(var(--u) * 700) minmax(0, 1fr); gap: calc(var(--u) * 45); align-items: center; transform: translateY(-50%); }
+.d-herocol { min-width: 0; color: #fff; }
+.d-herotitle { margin: 0; font-size: calc(var(--u) * 44); line-height: 1.12; font-weight: 700; letter-spacing: -.012em; }
+.d-herotitle span { display: block; }
+.d-herotitle .d-red-t { color: var(--red); font-size: calc(var(--u) * 50); }
+.d-herosub { margin: calc(var(--u) * 16) 0 0; font-size: calc(var(--u) * 26); line-height: 1.22; font-weight: 400; }
+.d-herosub b { font-weight: 700; white-space: nowrap; }
+.d-herolist { display: grid; gap: calc(var(--u) * 10); margin: calc(var(--u) * 22) 0 0; padding: 0; list-style: none; font-size: calc(var(--u) * 20); }
+.d-herolist li { display: inline-flex; align-items: center; gap: calc(var(--u) * 10); }
+.d-herolist .d-check { width: calc(var(--u) * 27); height: calc(var(--u) * 27); flex: none; }
+.d-herobtns { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 14); margin-top: calc(var(--u) * 28); }
+.d-herobtn { display: inline-flex; align-items: center; justify-content: center; gap: calc(var(--u) * 12); height: calc(var(--u) * 64); padding: 0 calc(var(--u) * 24); border-radius: 999px; color: #fff; font: inherit; font-size: calc(var(--u) * 21); font-weight: 700; text-align: left; white-space: nowrap; }
+.d-herobtn svg { width: calc(var(--u) * 34); height: calc(var(--u) * 34); flex: none; fill: none; stroke: #fff; }
+.d-herobtn span { display: block; }
+.d-herobtn-alt { font-size: calc(var(--u) * 19); }
+.d-herobtn-alt b { display: block; font-weight: 700; }
+.d-herobtn-alt small { display: block; margin-top: calc(var(--u) * 2); font-size: calc(var(--u) * 17); font-weight: 400; }
+.d-herocard { position: relative; width: 100%; overflow: hidden; border: calc(var(--u) * 2) solid rgb(255 255 255 / .22); border-radius: calc(var(--u) * 22); background: #06174a; box-shadow: 0 calc(var(--u) * 28) calc(var(--u) * 64) rgb(0 0 20 / .55), 0 0 calc(var(--u) * 100) rgb(104 76 255 / .38); }
+.d-herobar { display: flex; align-items: center; gap: calc(var(--u) * 8); height: calc(var(--u) * 36); padding: 0 calc(var(--u) * 16); background: #101e47; border-bottom: 1px solid rgb(255 255 255 / .1); }
+.d-herobar i { width: calc(var(--u) * 11); height: calc(var(--u) * 11); border-radius: 50%; background: #ff5f57; }
+.d-herobar i:nth-child(2) { background: #febc2e; }
+.d-herobar i:nth-child(3) { background: #28c840; }
+.d-herobar span { margin-left: calc(var(--u) * 14); padding: calc(var(--u) * 3) calc(var(--u) * 46) calc(var(--u) * 3) calc(var(--u) * 14); border-radius: 999px; color: #b9c4ee; background: rgb(255 255 255 / .09); font-size: calc(var(--u) * 14); }
+.d-herovid { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; pointer-events: none; }
+.d-heroswoosh { position: absolute; z-index: 0; right: calc(50% - var(--u) * 835.5); bottom: 0; width: calc(var(--u) * 241); height: calc(var(--u) * 122); pointer-events: none; }
 .d-check { display: grid; place-items: center; border-radius: 50%; color: #fff; background: linear-gradient(180deg, #ff2a40, #e8001a); }
 .d-check svg { width: 62%; height: 62%; }
 .d-check-lg svg { width: 60%; height: 60%; }
 
 /* Notre équipe */
-.d-mid { flex: 1 1 auto; height: auto; min-height: calc(var(--u) * var(--h)); background: #f2f8fe; }
+.d-mid, .d-faq { --u: var(--u2); }
+.d-mid { flex: none; height: calc(var(--u) * 440 + max(0px, var(--vh100) - var(--u) * 564)); background: #f2f8fe; }
+.d-mid > .d-in { top: calc(50% - var(--u) * 532); }   /* contenu centré : l'écran 2 (équipe + réalisations + FAQ) remplit la fenêtre */
 .d-clip-team { clip-path: inset(calc(var(--u) * 324) calc(var(--u) * 93) calc(var(--u) * 384) calc(var(--u) * 92) round calc(var(--u) * 26)); }
 .d-teambg { background: linear-gradient(90deg, #03173f, #06255a 60%, #05225f); }
 .d-tag { border-radius: 999px; }

@@ -68,7 +68,6 @@ const VISIBLE = 4, PITCH = 196;
 // Cadre de la vidéo agrandi : le hero passe de 245 px (maquette d'origine) à 310 px de haut ; le texte garde sa taille et est centré (voir .d-herotext).
 const HERO_H = 310;
 // La vidéo commence juste après la fin du texte (le titre se termine à x = 896) : le texte ne la recouvre jamais.
-const VIDEO_X = 905;
 
 // Pastilles FAQ : [question 1-6] positions [x, y, largeur] et position du texte
 const PILLS = [
@@ -126,33 +125,33 @@ export default function DesktopLanding({ onOpenRdv, onOpenSite, onOpenWork, onOp
       <main className="d-main">
         {/* ───── Hero ───── */}
         <section className="d-band d-hero" id="accueil" style={band(67, HERO_H)}>
-          <div className="d-in">
-            <div className="d-abs d-herobg" style={box(0, 67, 1671, HERO_H)} />
-            <AutoVideo className="d-abs d-herovid" src="/videos.mp4" poster="/desktop/hero-photo.jpg" style={box(VIDEO_X, 67, 1671 - VIDEO_X, HERO_H)} />
-            <img className="d-abs" src="/desktop/hero-swoosh.png" alt="" draggable={false} style={{ ...box(1430, 67 + HERO_H - 122, 241, 122), pointerEvents: "none" }} />
-            <div className="d-fill d-herotext">
-              <h1 className="d-h1">
-                <T x={143} base={107} fs={41.9} c="#fff">Nous créons nos propres plateformes.</T>
-                <T x={140} base={153} fs={46.6} c="var(--red)">Nous construisons la vôtre.</T>
+          <img className="d-heroswoosh" src="/desktop/hero-swoosh.png" alt="" draggable={false} />
+          <div className="d-herogrid">
+            <div className="d-herocol">
+              <h1 className="d-herotitle">
+                <span>Nous créons nos propres plateformes.</span>
+                <span className="d-red-t">Nous construisons la vôtre.</span>
               </h1>
-              <T x={142} base={186} fs={26.6} w={400} sx={0.966} c="#fff">Un site professionnel, rapide et référencé, livré <b className="d-b">dès 189 € HT.</b></T>
-              {[[141, 174, "Design moderne et responsive", 0.838], [411, 444, "Optimisé pour Google (SEO)", 0.87], [673, 707, "Livré en 3 à 7 jours ouvrés", 0.894]].map(([cx, tx, text, fs]) => (
-                <span key={text as string}>
-                  <span className="d-abs d-check" style={box(cx as number, 204, 20, 20)} aria-hidden="true"><Check strokeWidth={4} /></span>
-                  <T x={tx as number} base={219} fs={17.4} w={400} sx={fs as number} c="#fff">{text}</T>
-                </span>
-              ))}
-              <Btn b={[141, 243, 404, 54]} className="d-red d-pill-btn" label="Créer mon site dès 189 € HT" onClick={onOpenSite}>
-                <Laptop className="d-abs d-ico" strokeWidth={1.5} style={box(178, 249, 40, 40)} aria-hidden="true" />
-                <T x={236} base={276} fs={18.2} c="#fff">Créer mon site dès 189 € HT</T>
-                <ArrowRight className="d-abs d-ico" strokeWidth={1.6} style={box(483, 253.5, 33, 33)} aria-hidden="true" />
-              </Btn>
-              <Btn b={[565, 242, 302, 55]} className="d-outline d-pill-btn" label="Prendre rendez-vous — Projet sur mesure" onClick={onOpenRdv}>
-                <CalendarDays className="d-abs d-ico" strokeWidth={1.5} style={box(593, 248.5, 40, 40)} aria-hidden="true" />
-                <T x={653} base={261} fs={16.5} c="#fff">Prendre rendez-vous</T>
-                <T x={653} base={282} fs={15.4} w={400} c="#fff">Projet sur mesure</T>
-                <ArrowRight className="d-abs d-ico" strokeWidth={1.6} style={box(804.5, 261.5, 33, 33)} aria-hidden="true" />
-              </Btn>
+              <p className="d-herosub">Un site professionnel, rapide et référencé, livré <b>dès 189 € HT.</b></p>
+              <ul className="d-herolist">
+                {["Design moderne et responsive", "Optimisé pour Google (SEO)", "Livré en 3 à 7 jours ouvrés"].map((t) => (
+                  <li key={t}><span className="d-check" aria-hidden="true"><Check strokeWidth={4} /></span>{t}</li>
+                ))}
+              </ul>
+              <div className="d-herobtns">
+                <button type="button" className="d-btn d-red d-herobtn" onClick={onOpenSite}>
+                  <Laptop strokeWidth={1.5} aria-hidden="true" /><span>Créer mon site dès 189 € HT</span><ArrowRight strokeWidth={1.8} aria-hidden="true" />
+                </button>
+                <button type="button" className="d-btn d-outline d-herobtn d-herobtn-alt" onClick={onOpenRdv}>
+                  <CalendarDays strokeWidth={1.5} aria-hidden="true" />
+                  <span><b>Prendre rendez-vous</b><small>Projet sur mesure</small></span>
+                  <ArrowRight strokeWidth={1.8} aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+            <div className="d-herocard" aria-hidden="true">
+              <div className="d-herobar"><i /><i /><i /><span>monsite.fr</span></div>
+              <AutoVideo className="d-herovid" src="/videos.mp4" poster="/desktop/hero-photo.jpg" />
             </div>
           </div>
         </section>
