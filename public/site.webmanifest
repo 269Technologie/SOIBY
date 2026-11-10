@@ -1,0 +1,28 @@
+{
+  "name": "SOIBY — Studio Technologique & Plateformes Intelligentes",
+  "short_name": "SOIBY",
+  "description": "Création de sites web professionnels dès 189 € HT, applications mobiles, plateformes SaaS, IA, Blockchain et hébergement Cloud.",
+  "lang": "fr-FR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#00153a",
+  "theme_color": "#00153a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon-soiby.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/logoversion.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

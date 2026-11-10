@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://soiby.fr/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://soiby.fr/og-soiby-v5.jpg</image:loc>
+      <image:title>SOIBY — Studio Technologique &amp; Éditeur de Plateformes</image:title>
+      <image:caption>Création de sites web professionnels, applications mobiles, solutions SaaS, IA, Blockchain et Cloud.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://soiby.fr/equipe-studio.png</image:loc>
+      <image:title>Équipe de développement SOIBY</image:title>
+      <image:caption>Une équipe de 15 développeurs experts au service de votre projet digital.</image:caption>
+    </image:image>
+  </url>
+</urlset>
