@@ -15,8 +15,8 @@ function useIsMobile() {
   return isMobile;
 }
 
-export default function LandingMaquette({ onOpenRdv, onOpenSite, onOpenWork }: { onOpenRdv: () => void; onOpenSite: () => void; onOpenWork: (id: string) => void }) {
+export default function LandingMaquette({ onOpenRdv, onOpenSite, onOpenWork, onOpenDomain }: { onOpenRdv: () => void; onOpenSite: () => void; onOpenWork: (id: string) => void; onOpenDomain: (query: string) => void }) {
   const isMobile = useIsMobile();
-  if (isMobile) return <MobileLanding onOpenRdv={onOpenRdv} onOpenSite={onOpenSite} onOpenWork={onOpenWork} />;
-  return <DesktopLanding onOpenRdv={onOpenRdv} onOpenSite={onOpenSite} onOpenWork={onOpenWork} />;
+  if (isMobile) return <MobileLanding onOpenRdv={onOpenRdv} onOpenSite={onOpenSite} onOpenWork={onOpenWork} onOpenDomain={onOpenDomain} />;
+  return <DesktopLanding onOpenRdv={onOpenRdv} onOpenSite={onOpenSite} onOpenWork={onOpenWork} onOpenDomain={onOpenDomain} />;
 }

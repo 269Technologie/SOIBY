@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "re
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Briefcase, Calendar, CheckCircle2, Clock, ExternalLink, Loader2, Mail, MessageSquare, Phone, User, X } from "lucide-react";
 
-interface RdvModalProps { isOpen: boolean; onClose: () => void }
+interface RdvModalProps { isOpen: boolean; onClose: () => void; presetNotes?: string }
 interface BookingResult { success: boolean; message: string; eventId?: string; calendarLink?: string }
 interface Slot { start: string; end: string; time: string }
 interface BookingDay { date: string; label: string; slots: Slot[] }
@@ -42,7 +42,7 @@ function buildBookingDays(): BookingDay[] {
   return days;
 }
 
-export default function RdvModal({ isOpen, onClose }: RdvModalProps) {
+export default function RdvModal({ isOpen, onClose, presetNotes }: RdvModalProps) {
   const days = useMemo(buildBookingDays, [isOpen]);
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const [selectedStartTime, setSelectedStartTime] = useState<string | null>(null);
@@ -71,6 +71,10 @@ export default function RdvModal({ isOpen, onClose }: RdvModalProps) {
       setError("Impossible de charger les disponibilités. Veuillez réessayer.");
     } finally { setLoadingAvailability(false); }
   };
+
+  useEffect(() => {
+    if (isOpen && presetNotes) setForm((c) => ({ ...c, notes: presetNotes }));
+  }, [isOpen, presetNotes]);
 
   useEffect(() => {
     if (isOpen) void loadAvailability();

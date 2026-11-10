@@ -23,9 +23,8 @@ function CreateSiteIcon({ size }: { size: number }) {
 }
 
 // Réservation et recherche de noms de domaine : gérées sur SOIBY Cloud
-const CLOUD_URL = "https://cloud.soiby.fr";
 
-export default function MobileLanding({ onOpenRdv, onOpenSite, onOpenWork }: { onOpenRdv: () => void; onOpenSite: () => void; onOpenWork: (id: string) => void }) {
+export default function MobileLanding({ onOpenRdv, onOpenSite, onOpenWork, onOpenDomain }: { onOpenRdv: () => void; onOpenSite: () => void; onOpenWork: (id: string) => void; onOpenDomain: (query: string) => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [page, setPage] = useState(0);
@@ -160,7 +159,10 @@ export default function MobileLanding({ onOpenRdv, onOpenSite, onOpenWork }: { o
             <Cloud size={66} strokeWidth={1.7} aria-hidden="true" />
             <div><h2>SOIBY, c’est aussi</h2><p>la réservation de nom de domaine<br />et l’hébergement de vos projets.</p></div>
           </div>
-          <a className="m-domain m-domain-link" href={CLOUD_URL} target="_blank" rel="noopener noreferrer"><Search size={22} strokeWidth={2.6} aria-hidden="true" />Rechercher un nom de domaine</a>
+          <form className="m-domain" role="search" onSubmit={(e) => { e.preventDefault(); onOpenDomain(String(new FormData(e.currentTarget).get("domain") ?? "")); }}>
+            <input name="domain" placeholder="Rechercher un nom de domaine" aria-label="Rechercher un nom de domaine" autoComplete="off" autoCapitalize="none" spellCheck={false} />
+            <button type="submit" aria-label="Rechercher"><Search strokeWidth={2.8} aria-hidden="true" /></button>
+          </form>
           <ul className="m-cloud-list">
             {["Nom de domaine", "Hébergement web & apps", "Emails professionnels", "Certificat SSL (sécurité)"].map(t => <li key={t}><Check size={19} strokeWidth={3.4} />{t}</li>)}
           </ul>

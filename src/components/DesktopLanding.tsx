@@ -81,7 +81,7 @@ const PILLS = [
 ] as const;
 
 
-export default function DesktopLanding({ onOpenRdv, onOpenSite, onOpenWork }: { onOpenRdv: () => void; onOpenSite: () => void; onOpenWork: (id: string) => void }) {
+export default function DesktopLanding({ onOpenRdv, onOpenSite, onOpenWork, onOpenDomain }: { onOpenRdv: () => void; onOpenSite: () => void; onOpenWork: (id: string) => void; onOpenDomain: (query: string) => void }) {
   const [active, setActive] = useState("accueil");
   const [start, setStart] = useState(0);
   const [openQ, setOpenQ] = useState<number | null>(null);
@@ -227,10 +227,10 @@ export default function DesktopLanding({ onOpenRdv, onOpenSite, onOpenWork }: { 
               <T x={1311} base={595} fs={21.1} c="var(--red)">SOIBY, c’est aussi</T>
               <T x={1311} base={612} fs={14.9}>la réservation de nom de domaine</T>
               <T x={1311} base={628} fs={14.9}>et l’hébergement de vos projets.</T>
-              <Btn b={[1224, 641, 341, 31]} className="d-red d-pill-btn" label="Rechercher un nom de domaine sur SOIBY Cloud" href={CLOUD_URL} ext>
-                <Search className="d-abs d-ico" strokeWidth={2.6} style={box(1281, 646, 21, 21)} aria-hidden="true" />
-                <T x={1309} base={661} fs={13.6} c="#fff">Rechercher un nom de domaine</T>
-              </Btn>
+              <form className="d-abs d-domain" style={box(1224, 641, 341, 31)} role="search" onSubmit={(e) => { e.preventDefault(); onOpenDomain(String(new FormData(e.currentTarget).get("domain") ?? "")); }}>
+                <input name="domain" placeholder="Rechercher un nom de domaine" aria-label="Rechercher un nom de domaine" autoComplete="off" autoCapitalize="none" spellCheck={false} />
+                <button type="submit" className="d-red" aria-label="Rechercher"><Search strokeWidth={2.8} aria-hidden="true" /></button>
+              </form>
               {[[1231, 684, 1253, 693, "Nom de domaine", 11.5], [1231, 707, 1252, 716, "Emails professionnels", 11.65], [1396, 684, 1418, 693, "Hébergement web & apps", 11.6], [1396, 707, 1418, 716, "Certificat SSL (sécurité)", 11.7]].map(([cx, cy, tx, base, text, fs]) => (
                 <span key={text as string}>
                   <Check className="d-abs d-ccheck" strokeWidth={3.4} style={box((cx as number) - 3.5, (cy as number) - 5.25, 21, 21)} aria-hidden="true" />
