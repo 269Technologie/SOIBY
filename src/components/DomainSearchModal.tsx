@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowRightLeft, CalendarDays, Check, Info, Loader2, Search, ShoppingCart, X } from "lucide-react";
+import { apiGet } from "../api";
 import "../domain-search.css";
 
 /**
  * Recherche et gestion de nom de domaine.
- * Interroge /api/domains/check (serveur SOIBY, voir server/) : la clé du fournisseur ne quitte jamais le serveur.
+ * Interroge GET /api/v1/domains/check (backend SOIBY-BACK) : la clé du fournisseur ne quitte jamais le serveur.
  * Aucun achat ici : « Réserver » / « Transférer » ouvrent la prise de rendez-vous avec le besoin pré-rempli.
  */
 const TLDS = ["fr", "com", "net", "org", "info"];
-const CHECK_URL = "/api/domains/check";
 const CONCURRENCY = 2; // le fournisseur refuse les appels trop simultanés
 
 type Row =
@@ -25,18 +25,14 @@ function baseName(input: string) {
 }
 
 async function check(domain: string): Promise<Row> {
-  try {
-    const r = await fetch(`${CHECK_URL}?domain=${encodeURIComponent(domain)}`);
-    const data = await r.json().catch(() => null);
-    if (!r.ok) return { domain, state: "error", message: data?.error ?? "Vérification indisponible." };
-    // Jamais « pris » par défaut : une réponse qui n'est pas celle de l'API (ex. page HTML d'un serveur sans backend) est une erreur.
-    if (data?.status === "available") return { domain, state: "available", price: typeof data.price === "number" ? data.price : null };
-    if (data?.status === "taken") return { domain, state: "taken" };
-    if (data?.status === "unsupported") return { domain, state: "unsupported" };
-    return { domain, state: "error", message: "Vérification indisponible." };
-  } catch {
-    return { domain, state: "error", message: "Vérification indisponible." };
-  }
+  const result = await apiGet<{ status?: string; price?: number | null }>("/domains/check", { domain });
+  if (!result.ok) return { domain, state: "error", message: result.message ?? "Vérification indisponible." };
+  // Jamais « pris » par défaut : un statut inattendu est une erreur.
+  const { status, price } = result.data ?? {};
+  if (status === "available") return { domain, state: "available", price: typeof price === "number" ? price : null };
+  if (status === "taken") return { domain, state: "taken" };
+  if (status === "unsupported") return { domain, state: "unsupported" };
+  return { domain, state: "error", message: "Vérification indisponible." };
 }
 
 export default function DomainSearchModal({ isOpen, initialQuery = "", onClose, onRequestRdv }: { isOpen: boolean; initialQuery?: string; onClose: () => void; onRequestRdv: (notes: string) => void }) {
