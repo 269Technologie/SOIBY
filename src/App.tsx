@@ -4,9 +4,12 @@ import RdvModal from "./components/RdvModal";
 import SiteWizard from "./components/SiteWizard";
 import PortfolioModal from "./components/PortfolioModal";
 import DomainSearchModal from "./components/DomainSearchModal";
+import LegalModal from "./components/LegalModal";
 import { openGoogleBooking } from "./booking";
+import { useSectionRoutes } from "./sectionRoutes";
 
 export default function App() {
+  useSectionRoutes();
   const [isRdvOpen, setIsRdvOpen] = useState(false);
   const [isSiteOpen, setIsSiteOpen] = useState(false);
   const [domainQuery, setDomainQuery] = useState<string | null>(null);   // recherche de domaine ouverte (texte saisi sur l'accueil)
@@ -22,5 +25,6 @@ export default function App() {
     <SiteWizard isOpen={isSiteOpen} onClose={() => setIsSiteOpen(false)} onRequestQuote={() => { setIsSiteOpen(false); openRdv(); }} />
     <DomainSearchModal isOpen={domainQuery !== null} initialQuery={domainQuery ?? ""} onClose={() => setDomainQuery(null)} onRequestRdv={(notes) => { setDomainQuery(null); openRdv(notes); }} />
     <PortfolioModal workId={workId} onClose={() => setWorkId(null)} />
+    <LegalModal />
   </>;
 }

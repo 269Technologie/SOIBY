@@ -17,4 +17,16 @@
       <image:caption>Une équipe de 15 développeurs experts au service de votre projet digital.</image:caption>
     </image:image>
   </url>
+  <url>
+    <loc>https://soiby.fr/mentions-legales</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://soiby.fr/politique-confidentialite</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

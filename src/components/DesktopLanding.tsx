@@ -44,12 +44,12 @@ function Btn({ b, className = "", label, href, ext, onClick, children }: BtnProp
 }
 
 const NAV = [
-  { id: "accueil", label: "Accueil", x: 406, fs: 17.7, href: "#accueil" },
-  { id: "equipe", label: "Notre équipe", x: 542, fs: 17.3, href: "#equipe" },
-  { id: "realisations", label: "Réalisations", x: 711, fs: 16.9, href: "#realisations" },
+  { id: "accueil", label: "Accueil", x: 406, fs: 17.7, href: "/" },
+  { id: "equipe", label: "Notre équipe", x: 542, fs: 17.3, href: "/equipe" },
+  { id: "realisations", label: "Réalisations", x: 711, fs: 16.9, href: "/realisations" },
   { id: "cloud", label: "Domaines & Hébergement", x: 872, fs: 17, href: CLOUD_URL, ext: true },
-  { id: "faq", label: "FAQ", x: 1140, fs: 16.1, href: "#faq" },
-  { id: "contact", label: "Contact", x: 1235, fs: 17, href: "#contact" },
+  { id: "faq", label: "FAQ", x: 1140, fs: 16.1, href: "/faq" },
+  { id: "contact", label: "Contact", x: 1235, fs: 17, href: "/contact" },
 ] as const;
 
 const WORKS = [
@@ -104,7 +104,7 @@ export default function DesktopLanding({ onOpenRdv, onOpenSite, onOpenWork, onOp
       {/* ───── En-tête ───── */}
       <header className="d-band d-header" style={band(0, 67)}>
         <div className="d-in">
-          <a className="d-abs" href="#accueil" aria-label="SOIBY — Respirez on s’occupe de tout !" style={box(138, 0, 136, 67)} onClick={() => setActive("accueil")}>
+          <a className="d-abs" href="/" aria-label="SOIBY — Respirez on s’occupe de tout !" style={box(138, 0, 136, 67)} onClick={() => setActive("accueil")}>
             <img src="/desktop/logo-header.png" alt="" draggable={false} />
           </a>
           <nav aria-label="Navigation principale">

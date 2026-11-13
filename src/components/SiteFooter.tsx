@@ -45,7 +45,7 @@ export default function SiteFooter({ onOpenRdv, onOpenSite }: { onOpenRdv: () =>
         {/* Bandeau supérieur */}
         <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-5">
-            <a href="#accueil" aria-label="SOIBY — retour à l’accueil" className="shrink-0">
+            <a href="/" aria-label="SOIBY — retour à l’accueil" className="shrink-0">
               <img src="/desktop/logo-footer.png" alt="SOIBY — Respirez on s’occupe de tout !" className="h-16 w-auto" draggable={false} />
             </a>
             <div className="border-l border-white/15 pl-5">
@@ -69,10 +69,10 @@ export default function SiteFooter({ onOpenRdv, onOpenSite }: { onOpenRdv: () =>
         {/* Colonnes de navigation */}
         <div className="mb-8 grid grid-cols-2 gap-y-8 lg:grid-cols-4">
           <Column index={0} icon={<Heart className="h-4 w-4 fill-[#ff4458] text-[#ff4458]" />} title="À PROPOS">
-            <li><a href="#equipe" className={link}>Qui sommes-nous</a></li>
-            <li><a href="#equipe" className={link}>Notre équipe</a></li>
-            <li><a href="#realisations" className={link}>Nos réalisations</a></li>
-            <li><a href="#faq" className={link}>Questions fréquentes</a></li>
+            <li><a href="/equipe" className={link}>Qui sommes-nous</a></li>
+            <li><a href="/equipe" className={link}>Notre équipe</a></li>
+            <li><a href="/realisations" className={link}>Nos réalisations</a></li>
+            <li><a href="/faq" className={link}>Questions fréquentes</a></li>
           </Column>
 
           <Column index={1} icon={<Compass className="h-4 w-4 text-[#ff4458]" />} title="NOS SERVICES">
@@ -137,16 +137,16 @@ export default function SiteFooter({ onOpenRdv, onOpenSite }: { onOpenRdv: () =>
             <h5 className="mb-3 flex items-center gap-2 text-sm font-semibold tracking-wide text-white"><FileText className="h-4 w-4 text-[#ff4458]" />MENTIONS LÉGALES</h5>
             <ul className="space-y-2 text-sm lg:flex lg:flex-wrap lg:items-center lg:gap-x-1 lg:space-y-0">
               <li className="lg:flex lg:items-center">
-                <a href="#" className={link}>Mentions légales</a>
+                <a href="/mentions-legales" className={link}>Mentions légales</a>
                 <span className="mx-1.5 hidden text-slate-600 lg:inline">•</span>
               </li>
-              <li className="lg:flex lg:items-center"><a href="#" className={link}>Politique de confidentialité</a></li>
+              <li className="lg:flex lg:items-center"><a href="/politique-confidentialite" className={link}>Politique de confidentialité</a></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-white/15 pt-6">
-          <p className="text-center text-sm text-slate-400">© 2026 SOIBY • Tous droits réservés</p>
+          <p className="text-center text-sm text-slate-400">© 2026 SOIBY SAS • Tous droits réservés</p>
           <p className="mt-1.5 flex items-center justify-center gap-1.5 text-center text-xs leading-relaxed text-slate-500">
             <BadgeCheck className="h-3.5 w-3.5" />
             Studio technologique &amp; éditeur de plateformes • Création de sites, applications et solutions sur mesure

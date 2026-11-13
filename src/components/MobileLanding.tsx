@@ -87,13 +87,13 @@ export default function MobileLanding({ onOpenRdv, onOpenSite, onOpenWork, onOpe
     <div className="m-page">
       <header className="m-header">
         <div className="m-header-inner">
-          <a href="#accueil" className="m-logo"><img src="/logoversion.png" alt="SOIBY — Respirez on s’occupe de tout !" /></a>
+          <a href="/" className="m-logo"><img src="/logoversion.png" alt="SOIBY — Respirez on s’occupe de tout !" /></a>
           <button type="button" className="m-header-cta" onClick={onOpenSite}><CreateSiteIcon size={19} />Créer mon site</button>
           <button type="button" className="m-burger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" aria-expanded={menuOpen}>{menuOpen ? <X size={30} strokeWidth={2.6} /> : <Menu size={32} strokeWidth={2.8} />}</button>
         </div>
         {menuOpen && <nav className="m-nav" onClick={() => setMenuOpen(false)}>
-          <a href="#accueil">Accueil</a><a href="#equipe">L’équipe</a><a href="#realisations">Nos réalisations</a>
-          <a href="#cloud">Nom de domaine & hébergement</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+          <a href="/">Accueil</a><a href="/equipe">L’équipe</a><a href="/realisations">Nos réalisations</a>
+          <a href="/cloud">Nom de domaine & hébergement</a><a href="/faq">FAQ</a><a href="/contact">Contact</a>
           <button type="button" onClick={onOpenRdv}>Prendre rendez-vous</button>
         </nav>}
       </header>
@@ -112,7 +112,7 @@ export default function MobileLanding({ onOpenRdv, onOpenSite, onOpenWork, onOpe
           <button type="button" className="m-cta-main" onClick={onOpenSite}><Laptop size={46} strokeWidth={1.6} aria-hidden="true" /><span>Créer mon site<br />dès 189&nbsp;€&nbsp;HT <ArrowRight size={26} strokeWidth={2.2} /></span></button>
           <button type="button" className="m-cta-rdv" onClick={onOpenRdv}><CalendarDays size={40} strokeWidth={1.6} aria-hidden="true" /><span><strong>Prendre rendez-vous</strong><small>Projet sur mesure <ArrowRight size={20} strokeWidth={2} /></small></span></button>
           <p className="m-hero-note"><Info size={16} strokeWidth={2} aria-hidden="true" /> Création du site uniquement,<br />hors nom de domaine et hébergement. Prix HT.</p>
-          <a href="#equipe" className="m-scroll" aria-label="Découvrir la suite"><ChevronDown size={30} strokeWidth={3} /></a>
+          <a href="/equipe" className="m-scroll" aria-label="Découvrir la suite"><ChevronDown size={30} strokeWidth={3} /></a>
         </section>
 
         {/* Écran 2 — Équipe, réalisations, cloud */}
